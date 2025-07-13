@@ -1,122 +1,790 @@
-﻿<!doctype html>
-<html class="no-js" lang="fa" dir="rtl">
-
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
-        <title>Naameh / نامه</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="author" content="ThemeZaa">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-        <meta name="description" content="Elevate your online presence with Crafto - a modern, versatile, multipurpose Bootstrap 5 responsive HTML5, SCSS template using highly creative 52+ ready demos.">
-        <!-- favicon icon -->
-        <link rel="shortcut icon" href="images/favicon.png">
-        <link rel="apple-touch-icon" href="images/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-        <!-- google fonts preconnect -->
-        <link rel="preconnect" href="index-3.html" crossorigin>
-        <link rel="preconnect" href="index-4.html" crossorigin>
-        <!-- style sheets and font icons  -->
-        <link rel="stylesheet" href="css/vendors.min.css"/>
-        <link rel="stylesheet" href="css/icon.min.css"/>
-        <link rel="stylesheet" href="css/style.min.css"/>
-        <link rel="stylesheet" href="css/responsive.min.css"/>
-        <link rel="stylesheet" href="css/application.css" />
-    </head>
-    <body data-mobile-nav-style="classic" class="custom-cursor"> 
-        <!-- start cursor -->
-        <div class="cursor-page-inner">
-            <div class="circle-cursor circle-cursor-inner"></div>
-            <div class="circle-cursor circle-cursor-outer"></div>
-        </div>
-        <!-- end cursor -->
-        <!-- start header -->
-        <header>
-            <!-- start navigation -->
-            <nav class="navbar navbar-expand-lg header-light bg-transparent disable-fixed" data-header-hover="light"> 
-                <div class="container-fluid">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نامه - نرم‌افزار معلم هوشمند</title>
+    <meta name="description" content="پلتفرم آموزش هوشمند با هوش مصنوعی برای دانش‌آموزان ایران">
+
+    <!-- Custom CSS -->
+    <link href="assets/code/index.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="assets/code/tailwind.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="assets/code/lucide.js"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: 'hsl(221, 83%, 53%)',
+                            foreground: 'hsl(0, 0%, 98%)',
+                            hover: 'hsl(221, 83%, 45%)'
+                        },
+                        secondary: {
+                            DEFAULT: 'hsl(25, 95%, 53%)',
+                            foreground: 'hsl(0, 0%, 98%)',
+                            hover: 'hsl(25, 95%, 45%)'
+                        },
+                        success: {
+                            DEFAULT: 'hsl(142, 76%, 36%)',
+                            foreground: 'hsl(0, 0%, 98%)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-1">
+                    <img src="assets/images/logo.png" class="h-12 w-12">
+                    <span class="text-3xl font-bold text-gradient">نامه</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">خانه</a>
+                    <a href="#features" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">ویژگی‌ها</a>
+                    <a href="#stats" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">آمار</a>
+                    <a href="#pricing" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">قیمت‌گذاری</a>
+                    <a href="#contact" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium">تماس</a>
+                </nav>
+
+                <!-- Theme Toggle and Menu -->
+                <div class="flex items-center gap-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <i data-lucide="moon" class="h-5 w-5 dark:hidden"></i>
+                        <i data-lucide="sun" class="h-5 w-5 hidden dark:block"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <i data-lucide="menu" class="h-5 w-5" id="menu-icon"></i>
+                        <i data-lucide="x" class="h-5 w-5 hidden" id="close-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav id="mobile-menu" class="md:hidden py-4 border-t border-gray-200 dark:border-gray-700 hidden">
+                <div class="flex flex-col gap-4">
+                    <a href="#home" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium py-2">خانه</a>
+                    <a href="#features" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium py-2">ویژگی‌ها</a>
+                    <a href="#stats" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium py-2">آمار</a>
+                    <a href="#pricing" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium py-2">قیمت‌گذاری</a>
+                    <a href="#contact" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium py-2">تماس</a>
                 </div>
             </nav>
-            <!-- end navigation -->
-        </header>
-        <!-- end header --> 
-        <!-- start section -->
-        <section class="p-0 cover-background full-screen ipad-top-space-margin md-h-auto position-relative md-pb-70px" style="background-image: url('images/demo-application-home-banner.jpg')">
-            <div id="particles-style-01" class="h-100 position-absolute left-0px top-0 w-100" data-particle="true" data-particle-options='{"particles": {"number": {"value": 12,"density": {"enable": true,"value_area": 2000}},"color": {"value": ["#8f76f5", "#a65cef", "#c74ad2", "#e754a4", "#ff6472"]},"shape": {"type": "circle","stroke":{"width":0,"color":"#000000"}},"opacity": {"value": 0.3,"random": false,"anim": {"enable": false,"speed": 1,"sync": false}},"size": {"value": 8,"random": true,"anim": {"enable": false,"sync": true}},"line_linked":{"enable":false,"distance":0,"color":"#ffffff","opacity":0.4,"width":1},"move": {"enable": true,"speed":1,"direction": "right","random": false,"straight": false}},"interactivity": {"detect_on": "canvas","events": {"onhover": {"enable": false,"mode": "repulse"},"onclick": {"enable": false,"mode": "push"},"resize": true}},"retina_detect": false}'></div> 
-            <div class="container h-100 position-relative z-index-9">
-                <div class="row align-items-center h-100 justify-content-center">
-                    <div class="col-lg-6 col-md-10 text-center position-relative md-mb-50px" data-anime='{ "el": "childs", "opacity": [0, 1], "translateY": [80, 0], "staggervalue": 200, "duration": 900, "easing": "easeOutCirc" }'> 
-                        <div class="d-inline-block">
-                            <div class="text-end w-90 lg-w-80 ms-auto animation-float">
-                                <img src="images/Screenshot_1.png" alt="" style="max-width: 300px !important;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-5 ps-3 md-ps-15px col-lg-6 col-md-9 position-relative text-center text-lg-start" data-anime='{ "el": "childs", "translateY": [50, 0], "perspective": [1200,1200], "scale": [1.1, 1], "rotateY": [50, 0], "opacity": [0,1], "duration": 800, "delay": 200, "staggervalue": 300, "easing": "easeOutQuad" }'> 
-                        <div class="fs-90 xl-fs-80 lh-80 mb-35px text-dark-gray ls-minus-3px">
-                            <span class="d-inline-block rtl">شب امتحانه؟</span>
-                        </div>
-                        <div class="fs-90 xl-fs-80 lh-80 mb-35px text-dark-gray ls-minus-3px small-text text-center">
-                          <span class="d-inline-block">نگرانی نداره! دستیار دَرسیت همیشه کنارته!</span>
-                        </div>
-                        <div class="row pe-20px md-ps-25px sm-px-0 md-border-end-0" >
-                            <a href="#" class="col-6">
-                                <img src="images/app-store-white.svg" class="box-shadow-medium-bottom box-shadow-quadruple-large-hover border-radius-4px" alt="">
-                            </a>
-                            <a href="#" class="col-6">
-                                <img src="images/play-store-white.svg" class="box-shadow-medium-bottom box-shadow-quadruple-large-hover border-radius-4px" alt="">
-                            </a>
-                        </div>
-                    </div>  
-                </div>
-            </div>
-            <!-- start marquees -->
-            <div class="marquees-text fw-800 fs-250 md-fs-200 ls-minus-10px text-dark-gray text-nowrap position-absolute bottom-130px opacity-1 text-center">شب امتحانه؟ نگرانی نداره! دستیار دَرسیت همیشه کنارته!</div>
-            <!-- end marquees -->
-        </section>
-        <!-- end section -->
-        <!-- start section -->
-        <section class="p-0 overflow-hidden">
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-lg-7 position-relative text-center md-mb-30px" data-anime='{ "effect": "slide", "color": "#ffffff", "direction":"lr", "easing": "easeOutQuad", "delay":50}'>
-                        <figure>
-                            <div class="atropos" data-atropos>
-                                <div class="atropos-scale">
-                                    <div class="atropos-rotate">
-                                        <div class="atropos-inner">
-                                            <img data-atropos-offset="5" src="images/app_two_images.jpg" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-<!--                            <figcaption class="position-absolute bottom-130px sm-bottom-100px xs-bottom-80px right-0px sm-right-minus-40px xs-right-minus-30px xs-w-80 z-index-9">-->
-<!--                                <img src="images/demo-application-about-02.png" class="animation-float" alt="">-->
-<!--                            </figcaption>-->
-                        </figure>
-                    </div>
-                <div class="col-lg-5 text-center text-lg-start ps-40px lg-ps-15px" data-anime='{ "el": "childs", "opacity": [0, 1], "rotateY": [-90, 0], "rotateZ": [-10, 0], "translateY": [80, 0], "translateZ": [50, 0], "staggervalue": 200, "duration": 900, "easing": "easeOutCirc" }'>
-                    <h3 class="fw-700 text-dark-gray ls-minus-1px w-90 xl-w-100 text-center">اپلیکیشن نامه</h3>
-                    <p class="w-90 xs-w-100 mx-auto mx-lg-0 text-center">اپلیکیشن نامه (نرم افزار معلم هوشمند)، یه بازی فان و لذت بخش هست که با روش گیمیفیکیشن و چندین تا روش دیگه، درس هارو به شما در کمترین زمان و به بهترین شکل ممکن آموزش میده و باعث میشه که از درس خوندن لذت ببرید!</p>
-                    <div class="text-center">
-                        <a href="https://drive.google.com/uc?id=1yG97c6w7hBav3K7DCoENhsNo0Ik6ycRE&export=download" class="btn btn-small btn-rounded with-rounded btn-box-shadow btn-dark-gray text-uppercase-inherit">دانلود مستقیم<span class="bg-licorice-blue text-white"><i class="feather icon-feather-arrow-down"></i></span></a>
-                        <a href="https://t.me/NimaFanniasl/121" class="btn btn-small btn-rounded with-rounded btn-box-shadow btn-dark-gray text-uppercase-inherit">دانلود از تلگرام<span class="bg-licorice-blue text-white"><i class="feather icon-feather-arrow-down"></i></span></a>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </section>
-        <!-- start scroll progress -->
-        <div class="scroll-progress d-none d-xxl-block">
-            <a href="#" class="scroll-top" aria-label="scroll">
-                <span class="scroll-text">Scroll</span><span class="scroll-line"><span class="scroll-point"></span></span>
-            </a>
         </div>
-        <!-- end scroll progress -->
-        <!-- javascript libraries -->
-        <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/vendors.min.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-    </body>
+    </header>
 
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-16 min-h-screen flex items-center">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-center lg:text-right space-y-8 animate-fade-in">
+                    <div class="space-y-4">
+                        <h1 class="text-5xl lg:text-6xl font-bold leading-tight">
+                            آموزش <span class="text-gradient">هوشمند</span> با هوش مصنوعی
+                        </h1>
+                        <p class="text-xl dark:text-gray-300 leading-relaxed max-w-2xl">
+                            نامه، پلتفرم آموزشی نوآورانه که با استفاده از هوش مصنوعی، آموزش با کیفیت و مقرون‌به‌صرفه را برای همه دانش‌آموزان ایران فراهم می‌کند
+                        </p>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-8 text-center">
+                        <div class="space-y-2">
+                            <div class="text-3xl font-bold text-blue-600">۱۶ میلیون</div>
+                            <div class="text-sm text-gray-300">دانش‌آموز ایرانی</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-3xl font-bold text-orange-500">۱-۱۲</div>
+                            <div class="text-sm text-gray-300">پایه تحصیلی</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-3xl font-bold text-green-600">۲۴/۷</div>
+                            <div class="text-sm text-gray-300">دسترسی آموزش</div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button class="btn-hero-primary flex items-center justify-center gap-2">
+                            شروع یادگیری
+                            <i data-lucide="arrow-left" class="h-5 w-5"></i>
+                        </button>
+                        <button class="text-lg px-8 py-4 rounded-xl border-2 border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                            مشاهده ویژگی‌ها
+                        </button>
+                    </div>
+
+                    <!-- Features Icons -->
+                    <div class="flex justify-center lg:justify-start gap-6 pt-4">
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i data-lucide="brain" class="h-5 w-5 text-blue-600"></i>
+                            <span class="text-sm">هوش مصنوعی</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i data-lucide="users" class="h-5 w-5 text-orange-500"></i>
+                            <span class="text-sm">آموزش گروهی</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-300">
+                            <i data-lucide="book-open" class="h-5 w-5 text-green-600"></i>
+                            <span class="text-sm">محتوای جامع</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content - Screenshot Placeholder -->
+                <div class="animate-slide-up">
+                    <div class="screenshot-placeholder animate-float">
+                        <img src="assets/images/hero.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-blue-50/30 dark:bg-gray-800/30">
+        <div class="container mx-auto px-4">
+            <div class="text-center space-y-4 mb-16 animate-fade-in">
+                <h2 class="text-4xl lg:text-5xl font-bold">
+                    ویژگی‌های منحصر به فرد <span class="text-gradient">نامه</span>
+                </h2>
+                <p class="text-xl dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    با استفاده از تازه‌ترین فناوری‌های هوش مصنوعی، تجربه‌ای نوین از یادگیری را برای دانش‌آموزان ایرانی فراهم می‌کنیم
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Feature 1 -->
+                <div class="feature-card animate-slide-up group">
+                    <div class="space-y-4">
+                        <div class="text-blue-600 p-3 rounded-xl bg-blue-50 dark:bg-blue-900/20 w-fit group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="brain" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">هوش مصنوعی پیشرفته</h3>
+                        <p class="dark:text-gray-300 leading-relaxed">
+                            آموزش شخصی‌سازی شده با تکنولوژی‌های روز دنیا
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card animate-slide-up group" style="animation-delay: 0.1s">
+                    <div class="space-y-4">
+                        <div class="text-orange-500 p-3 rounded-xl bg-orange-50 dark:bg-orange-900/20 w-fit group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="clock" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">آموزش ۲۴ ساعته</h3>
+                        <p class="dark:text-gray-300 leading-relaxed">
+                            دسترسی همیشگی به محتوای آموزشی با کیفیت
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card animate-slide-up group" style="animation-delay: 0.2s">
+                    <div class="space-y-4">
+                        <div class="text-green-600 p-3 rounded-xl bg-green-50 dark:bg-green-900/20 w-fit group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="gamepad-2" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">بازی‌وار سازی (Gamification)</h3>
+                        <p class="dark:text-gray-300 leading-relaxed">
+                            بازی‌وار سازی برای سرگرم‌کننده شدن یادگیری
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card animate-slide-up group" style="animation-delay: 0.3s">
+                    <div class="space-y-4">
+                        <div class="text-blue-600 p-3 rounded-xl bg-blue-50 dark:bg-blue-900/20 w-fit group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="users" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">کلاس‌های گروهی آنلاین</h3>
+                        <p class="dark:text-gray-300 leading-relaxed">
+                            تعامل با سایر دانش‌آموزان و یادگیری جمعی
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card animate-slide-up group" style="animation-delay: 0.4s">
+                    <div class="space-y-4">
+                        <div class="text-orange-500 p-3 rounded-xl bg-orange-50 dark:bg-orange-900/20 w-fit group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="book-open" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">محتوای جامع</h3>
+                        <p class="dark:text-gray-300 leading-relaxed">
+                            پوشش کامل دروس از پایه اول تا دوازدهم
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card animate-slide-up group" style="animation-delay: 0.5s">
+                    <div class="space-y-4">
+                        <div class="text-green-600 p-3 rounded-xl bg-green-50 dark:bg-green-900/20 w-fit group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="award" class="h-6 w-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">آمادگی کنکور</h3>
+                        <p class="dark:text-gray-300 leading-relaxed">
+                            تمرین‌های تخصصی برای موفقیت در آزمون‌های ملی
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Screenshots Grid -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- AI Learning Feature -->
+                <div class="space-y-6">
+                    <div class="space-y-4">
+                        <img class="rounded-lg h-[525px]" src="assets/images/ai.gif">
+
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-2xl font-bold">یادگیری هوشمند با</h3>
+                            <span class="inline-flex items-center gap-2 text-gray-300">
+                                <i data-lucide="brain" class="h-8 w-8 text-blue-600"></i>
+                                <span class="text-2xl font-bold">هوش مصنوعی</span>
+                            </span>
+                        </div>
+
+                        <p class="dark:text-gray-300 leading-relaxed">
+                            هر دانش آموز نامه یک معلم خصوصی هوشمند همیشه در اختیار خود دارد و تمام سوالات درسی خود را میتواند از او بپرسد.
+                        </p>
+                        <div class="flex gap-4">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="trending-up" class="h-5 w-5 text-green-600"></i>
+                                <span class="text-sm">پیشرفت سریع‌تر</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="target" class="h-5 w-5 text-blue-600"></i>
+                                <span class="text-sm">آموزش دقیق</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Experience -->
+                <div class="space-y-6">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-bold">دسترسی آسان از هر مکان</h3>
+                        <p class="dark:text-gray-300 leading-relaxed">
+                            با طراحی واکنش‌گرا و رابط کاربری ساده، دانش‌آموزان می‌توانند از هر دستگاه و در هر زمان به محتوای آموزشی دسترسی پیدا کنند. آموزش دیگر محدود به زمان و مکان نیست.
+                        </p>
+                        <div class="flex gap-4">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="smartphone" class="h-5 w-5 text-orange-500"></i>
+                                <span class="text-sm">موبایل و تبلت</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="laptop" class="h-5 w-5 text-blue-500"></i>
+                                <span class="text-sm">رایانه</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="clock" class="h-5 w-5 text-green-600"></i>
+                                <span class="text-sm">۲۴ ساعته</span>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="assets/images/desktop.png" class="rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="py-20 gradient-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center space-y-4 mb-16 animate-fade-in">
+                <h2 class="text-4xl lg:text-5xl font-bold">
+                    آمار و ارقام <span class="text-gradient">چشمگیر</span>
+                </h2>
+                <p class="text-xl dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    نگاهی به پتانسیل عظیم بازار آموزش ایران و فرصت‌های پیش روی نامه
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="stat-card animate-slide-up group">
+                    <div class="space-y-4">
+                        <div class="gradient-primary p-4 rounded-2xl w-fit mx-auto group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="users" class="h-8 w-8 text-white"></i>
+                        </div>
+                        <div class="text-3xl lg:text-4xl font-bold">۱۶ میلیون</div>
+                        <div class="text-lg font-semibold text-blue-600">دانش‌آموز ایرانی</div>
+                        <p class="text-sm">بازار هدف بزرگ ما</p>
+                    </div>
+                </div>
+
+                <div class="stat-card animate-slide-up group" style="animation-delay: 0.3s">
+                    <div class="space-y-4">
+                        <div class="gradient-primary p-4 rounded-2xl w-fit mx-auto group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="pencil-off" class="h-8 w-8 text-white"></i>
+                        </div>
+                        <div class="text-2xl lg:text-3xl font-bold">دسترسی نداشتن</div>
+                        <div class="text-lg font-semibold text-blue-600">بسیاری از دانش آموزان</div>
+                        <p class="text-sm">به منابع درسی و کلاس های خصوصی</p>
+                    </div>
+                </div>
+
+                <div class="stat-card animate-slide-up group" style="animation-delay: 0.1s">
+                    <div class="space-y-4">
+                        <div class="gradient-primary p-4 rounded-2xl w-fit mx-auto group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="book-open" class="h-8 w-8 text-white"></i>
+                        </div>
+                        <div class="text-3xl lg:text-4xl font-bold">۱۲ پایه</div>
+                        <div class="text-lg font-semibold text-blue-600">تحصیلی</div>
+                        <p class="text-sm">پوشش کامل دوران تحصیل</p>
+                    </div>
+                </div>
+
+                <div class="stat-card animate-slide-up group" style="animation-delay: 0.2s">
+                    <div class="space-y-4">
+                        <div class="gradient-primary p-4 rounded-2xl w-fit mx-auto group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="award" class="h-8 w-8 text-white"></i>
+                        </div>
+                        <div class="text-3xl lg:text-4xl font-bold">۱٪ بازار</div>
+                        <div class="text-lg font-semibold text-blue-600">هدف اولیه</div>
+                        <p class="text-sm">۱۶۰ هزار دانش‌آموز</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revenue Model -->
+            <div class="bg-gradient-to-br from-blue-50 to-orange-50 dark:from-blue-900/20 dark:to-orange-900/20 rounded-3xl p-8 lg:p-12 border border-blue-200 dark:border-blue-700">
+                <div class="text-center space-y-6">
+                    <h3 class="text-3xl font-bold">مدل درآمدزایی نامه</h3>
+                    <div class="grid md:grid-cols-4 gap-5 max-w-4xl mx-auto">
+                        <div class="space-y-4">
+                            <div class="text-2xl font-bold text-blue-600">۱٪ بازار</div>
+                            <div class="dark:text-gray-300">
+                                ۱۶۰ هزار دانش‌آموز از ۱۶ میلیون
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="text-2xl font-bold text-orange-500">۲۰۰ هزار تومان</div>
+                            <div class="dark:text-gray-300">
+                                متوسط اشتراک ماهانه
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="text-2xl font-bold text-yellow-600">۳۲ میلیارد تومان</div>
+                            <div class="dark:text-gray-300">
+                                درآمد ماهانه پیش‌بینی شده
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="text-2xl font-bold text-red-600">۲ میلیارد تومان</div>
+                            <div class="dark:text-gray-300">
+                                هزینه ماهانه پیش‌بینی شده
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                            <div class="text-4xl font-bold text-green-600">۳۰ میلیارد تومان</div>
+                            <div class="dark:text-gray-300 text-2xl">
+                                سود ماهانه
+                            </div>
+                    </div>
+                    <p class="dark:text-gray-300 max-w-2xl mx-auto">
+                        .با در نظر گیری فقط ۱٪ از دانش‌آموزان ایران به عنوان کاربران نامه، پتانسیل درآمدزایی فوق‌العاده‌ای وجود دارد
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+<!--    <section id="pricing" class="py-20 bg-white dark:bg-gray-900">-->
+<!--        <div class="container mx-auto px-4">-->
+<!--            <div class="text-center space-y-4 mb-16 animate-fade-in">-->
+<!--                <h2 class="text-4xl lg:text-5xl font-bold">-->
+<!--                    قیمت‌گذاری <span class="text-gradient">مناسب</span>-->
+<!--                </h2>-->
+<!--                <p class="text-xl dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">-->
+<!--                    بسته‌های متنوع آموزشی برای پاسخگویی به نیازهای مختلف دانش‌آموزان-->
+<!--                </p>-->
+<!--                <div class="inline-flex items-center gap-2 bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400 px-4 py-2 rounded-full text-sm font-medium">-->
+<!--                    <i data-lucide="star" class="h-4 w-4"></i>-->
+<!--                    تخفیف ویژه اولین خرید تا ۴۰٪-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">-->
+<!--                &lt;!&ndash; Basic Plan &ndash;&gt;-->
+<!--                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">-->
+<!--                    <div class="text-center space-y-6">-->
+<!--                        <div class="space-y-4">-->
+<!--                            <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-2xl w-fit mx-auto">-->
+<!--                                <i data-lucide="star" class="h-8 w-8 text-blue-600"></i>-->
+<!--                            </div>-->
+<!--                            <h3 class="text-2xl font-bold">پایه</h3>-->
+<!--                        </div>-->
+
+<!--                        <div class="space-y-2">-->
+<!--                            <div class="flex items-center justify-center gap-2">-->
+<!--                                <span class="text-4xl font-bold">-&#45;&#45;</span>-->
+<!--                                <div class="text-right">-->
+<!--                                    <div class="text-sm text-gray-300 line-through">   </div>-->
+<!--                                    <div class="text-sm text-gray-300">هزار تومان</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="text-gray-300">ماهانه</div>-->
+<!--                        </div>-->
+
+<!--                        <button class="w-full py-6 text-lg font-bold rounded-xl border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors">-->
+<!--                            انتخاب بسته پایه-->
+<!--                        </button>-->
+
+<!--                        <div class="space-y-4 text-right">-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div><div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div><div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div><div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div><div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Standard Plan (Popular) &ndash;&gt;-->
+<!--                <div class="relative bg-white dark:bg-gray-800 border border-blue-600 rounded-3xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 scale-105 shadow-xl">-->
+<!--                    <div class="absolute -top-4 right-1/2 transform translate-x-1/2">-->
+<!--                        <div class="gradient-primary text-white px-4 py-2 rounded-full text-sm font-bold">-->
+<!--                            محبوب‌ترین-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="text-center space-y-6">-->
+<!--                        <div class="space-y-4">-->
+<!--                            <div class="gradient-primary p-4 rounded-2xl w-fit mx-auto">-->
+<!--                                <i data-lucide="zap" class="h-8 w-8 text-white"></i>-->
+<!--                            </div>-->
+<!--                            <h3 class="text-2xl font-bold">استاندارد</h3>-->
+<!--                        </div>-->
+
+<!--                        <div class="space-y-2">-->
+<!--                            <div class="flex items-center justify-center gap-2">-->
+<!--                                <span class="text-4xl font-bold">-&#45;&#45;</span>-->
+<!--                                <div class="text-right">-->
+<!--                                    <div class="text-sm text-gray-300 line-through">   </div>-->
+<!--                                    <div class="text-sm text-gray-300">هزار تومان</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="text-gray-300">ماهانه</div>-->
+<!--                        </div>-->
+
+<!--                        <button class="btn-hero-primary w-full py-6 text-lg font-bold rounded-xl">-->
+<!--                            انتخاب بسته استاندارد-->
+<!--                        </button>-->
+
+<!--                        <div class="space-y-4 text-right">-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3 grid-cols-2">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Premium Plan &ndash;&gt;-->
+<!--                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">-->
+<!--                    <div class="text-center space-y-6">-->
+<!--                        <div class="space-y-4">-->
+<!--                            <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-2xl w-fit mx-auto">-->
+<!--                                <i data-lucide="crown" class="h-8 w-8 text-blue-600"></i>-->
+<!--                            </div>-->
+<!--                            <h3 class="text-2xl font-bold">پریمیوم</h3>-->
+<!--                        </div>-->
+
+<!--                        <div class="space-y-2">-->
+<!--                            <div class="flex items-center justify-center gap-2">-->
+<!--                                <span class="text-4xl font-bold">-&#45;&#45;</span>-->
+<!--                                <div class="text-right">-->
+<!--                                    <div class="text-sm text-gray-300 line-through">   </div>-->
+<!--                                    <div class="text-sm text-gray-300">هزار تومان</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="text-gray-300">ماهانه</div>-->
+<!--                        </div>-->
+
+<!--                        <button class="w-full py-6 text-lg font-bold rounded-xl border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-colors">-->
+<!--                            انتخاب بسته پریمیوم-->
+<!--                        </button>-->
+
+<!--                        <div class="space-y-4 text-right">-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                            <div class="flex items-center gap-3">-->
+<!--                                <i data-lucide="check" class="h-5 w-5 text-green-600 flex-shrink-0"></i>-->
+<!--                                <span class="dark:text-gray-300">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-4 py-16">
+            <div class="grid lg:grid-cols-4 gap-12">
+                <!-- Logo and Description -->
+                <div class="space-y-6">
+                    <div class="flex items-center gap-2">
+                        <img src="assets/images/logo.png" class="h-16 w-16">
+                        <span class="text-4xl font-bold text-gradient">نامه</span>
+                    </div>
+                    <p class="dark:text-gray-300 leading-relaxed">
+                        پلتفرم آموزش هوشمند که با استفاده از هوش مصنوعی، آینده آموزش ایران را می‌سازد. یادگیری برای همه، در هر زمان و هر مکان.
+                    </p>
+<!--                    <div class="space-y-3">-->
+<!--                        <div class="flex items-center gap-3 dark:text-gray-300">-->
+<!--                            <i data-lucide="mail" class="h-5 w-5 text-blue-600"></i>-->
+<!--                            <span>info@naameh.me</span>-->
+<!--                        </div>-->
+<!--                        <div class="flex items-center gap-3 dark:text-gray-300">-->
+<!--                            <i data-lucide="phone" class="h-5 w-5 text-blue-600"></i>-->
+<!--                            <span>۰۹۹۹۹۹۹۹۹۹۹</span>-->
+<!--                        </div>-->
+<!--                        <div class="flex items-center gap-3 dark:text-gray-300">-->
+<!--                            <i data-lucide="map-pin" class="h-5 w-5 text-blue-600"></i>-->
+<!--                            <span>بوشهر، ایران</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+
+<!--                &lt;!&ndash; Product Links &ndash;&gt;-->
+<!--                <div class="space-y-6">-->
+<!--                    <h3 class="text-lg font-bold">محصول</h3>-->
+<!--                    <ul class="space-y-3">-->
+<!--                        <li><a href="#features" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">ویژگی‌ها</a></li>-->
+<!--                        <li><a href="#pricing" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">قیمت‌گذاری</a></li>-->
+<!--                        <li><a href="#" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">نسخه آزمایشی</a></li>-->
+<!--                        <li><a href="#" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">راهنمای استفاده</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Company Links &ndash;&gt;-->
+<!--                <div class="space-y-6">-->
+<!--                    <h3 class="text-lg font-bold">شرکت</h3>-->
+<!--                    <ul class="space-y-3">-->
+<!--                        <li><a href="#" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">درباره ما</a></li>-->
+<!--                        <li><a href="#" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">تیم ما</a></li>-->
+<!--                        <li><a href="#" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">فرصت‌های شغلی</a></li>-->
+<!--                        <li><a href="#" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">اخبار</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Support Links &ndash;&gt;-->
+<!--                <div class="space-y-6">-->
+<!--                    <h3 class="text-lg font-bold">پشتیبانی</h3>-->
+<!--                    <ul class="space-y-3">-->
+<!--                        <li><a href="#" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">مرکز راهنمایی</a></li>-->
+<!--                        <li><a href="#contact" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">تماس با ما</a></li>-->
+<!--                        <li><a href="#" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">گزارش مشکل</a></li>-->
+<!--                        <li><a href="#" class="dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">انتقادات و پیشنهادات</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Newsletter Section &ndash;&gt;-->
+<!--            <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">-->
+<!--                <div class="grid md:grid-cols-2 gap-8 items-center">-->
+<!--                    <div class="space-y-4">-->
+<!--                        <h3 class="text-2xl font-bold">از آخرین اخبار نامه با خبر شوید</h3>-->
+<!--                        <p class="dark:text-gray-300">-->
+<!--                            عضویت در خبرنامه و دریافت اطلاعات به‌روزرسانی‌ها و ویژگی‌های جدید-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                    <div class="flex gap-4">-->
+<!--                        <input -->
+<!--                            type="email" -->
+<!--                            placeholder="ایمیل شما"-->
+<!--                            class="flex-1 px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-blue-600 focus:outline-none"-->
+<!--                        />-->
+<!--                        <button class="btn-hero-primary whitespace-nowrap">عضویت</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="dark:text-gray-300 text-center md:text-right">
+                    © ۱۴۰۴ نامه. تمامی حقوق محفوظ است.
+                </div>
+                <div class="flex items-center gap-2 dark:text-gray-300">
+                    <span>ساخته شده با</span>
+                    <i data-lucide="heart" class="h-4 w-4 text-red-500 fill-current"></i>
+                    <span>توسط <a href="https://smartnima.com/">نیما فنی اصل</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'dark') {
+            html.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', function() {
+            html.classList.toggle('dark');
+            
+            // Save theme preference
+            if (html.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on links
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation classes when elements come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
 </html>

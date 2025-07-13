@@ -1,0 +1,175 @@
+@font-face {
+  font-family: "Arad";
+  src: url("../fonts/Arad-RegularDots2.ttf");
+}
+
+/* Custom Persian Design System */
+:root {
+    --background: 0 0% 100%;
+    --foreground: 217 19% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 217 19% 20%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 25 95% 53%;
+    --secondary-foreground: 0 0% 98%;
+    --accent: 221 60% 96%;
+    --accent-foreground: 221 83% 53%;
+    --muted: 220 13% 95%;
+    --muted-foreground: 217 19% 45%;
+    --border: 220 13% 91%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+}
+
+.dark {
+    --background: 217 19% 10%;
+    --foreground: 0 0% 95%;
+    --card: 217 19% 13%;
+    --card-foreground: 0 0% 95%;
+    --primary: 221 83% 65%;
+    --primary-foreground: 217 19% 10%;
+    --secondary: 25 95% 60%;
+    --secondary-foreground: 217 19% 10%;
+    --accent: 217 19% 18%;
+    --accent-foreground: 221 83% 65%;
+    --muted: 217 19% 15%;
+    --muted-foreground: 217 19% 65%;
+    --border: 217 19% 18%;
+    --success: 142 76% 45%;
+    --success-foreground: 0 0% 95%;
+}
+
+body {
+    font-family: 'Arad', ui-sans-serif, system-ui, sans-serif;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+}
+
+.gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+}
+
+.gradient-light {
+    background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--muted)));
+}
+
+.btn-hero-primary {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hero-primary:hover {
+    background: hsl(var(--primary));
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hero-secondary {
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hero-secondary:hover {
+    background: hsl(var(--secondary));
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border-color: hsl(var(--primary) / 0.2);
+    transform: translateY(-4px);
+}
+
+.stat-card {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--secondary) / 0.1));
+    border: 1px solid hsl(var(--primary) / 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.screenshot-placeholder {
+    background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--muted)));
+    border: 2px dashed hsl(var(--border));
+    border-radius: 0.75rem;
+    padding: 2rem;
+    text-align: center;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+}
