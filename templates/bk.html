@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="{{ lang }}" dir="{% if lang == 'fa' or lang == 'ar' %}rtl{% else %}ltr{% endif %}">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>نامه - نرم‌افزار معلم هوشمند</title>
-  <meta name="description" content="پلتفرم آموزش هوشمند با هوش مصنوعی برای دانش‌آموزان ایران" />
+  <title>{{ trans(key='site_title_full', lang=lang) }}</title>
+  <meta name="description" content="{{ trans(key='hero_description', lang=lang) }}" />
 
-  <!-- Tailwind CSS (CDN or your compiled file). If using CDN for demo: -->
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <!-- Tailwind 3 -->
   <script src="assets/code/tailwind.js"></script>
 
   <!-- Lucide Icons -->
   <script src="assets/code/lucide.js"></script>
+
+  <!-- HTMX -->
+  <script src="assets/code/htmx.js"></script>
 
   <!-- Tailwind Config -->
   <script>
@@ -95,16 +97,16 @@
         <div class="flex items-center justify-between px-4 md:px-6 h-16">
           <!-- Logo -->
           <a href="#home" class="flex items-center gap-2">
-            <img src="assets/images/logo.png" alt="Logo" class="h-9 w-9 rounded-xl shadow-glow" />
-            <span class="text-2xl font-extrabold text-gradient">نامه</span>
+            <img src="assets/images/logo.png" alt="{{ trans(key='brand_short', lang=lang) }}" class="h-9 w-9 rounded-xl shadow-glow" />
+            <span class="text-2xl font-extrabold text-gradient">{{ trans(key='brand_short', lang=lang) }}</span>
           </a>
 
           <!-- Desktop Nav -->
           <nav class="hidden md:flex items-center gap-6">
-            <a href="#home" class="hover:text-primary-600 dark:hover:text-primary-500 transition">خانه</a>
-            <a href="#features" class="hover:text-primary-600 dark:hover:text-primary-500 transition">ویژگی‌ها</a>
-            <a href="#stats" class="hover:text-primary-600 dark:hover:text-primary-500 transition">آمار</a>
-            <a href="#contact" class="hover:text-primary-600 dark:hover:text-primary-500 transition">درباره</a>
+            <a href="#home" class="hover:text-primary-600 dark:hover:text-primary-500 transition">{{ trans(key='nav_home_desktop', lang=lang) }}</a>
+            <a href="#features" class="hover:text-primary-600 dark:hover:text-primary-500 transition">{{ trans(key='nav_features_desktop', lang=lang) }}</a>
+            <a href="#stats" class="hover:text-primary-600 dark:hover:text-primary-500 transition">{{ trans(key='nav_stats_desktop', lang=lang) }}</a>
+            <a href="#contact" class="hover:text-primary-600 dark:hover:text-primary-500 transition">{{ trans(key='nav_about_desktop', lang=lang) }}</a>
           </nav>
 
           <!-- Actions -->
@@ -112,6 +114,10 @@
             <button id="theme-toggle" class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/30 dark:border-white/10 hover:bg-white/40 dark:hover:bg-white/10 transition">
               <i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i>
               <i data-lucide="sun" class="h-5 w-5 dark:hidden"></i>
+            </button>
+            <button id="lang-selector" hx-get="/en" class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/30 dark:border-white/10 hover:bg-white/40 dark:hover:bg-white/10 transition">
+              <i data-lucide="languages" class="h-5 w-5 hidden dark:block"></i>
+              <i data-lucide="x" class="h-5 w-5 dark:hidden"></i>
             </button>
             <button id="mobile-menu-btn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/30 dark:border-white/10 hover:bg-white/40 dark:hover:bg-white/10 transition">
               <i data-lucide="menu" class="h-5 w-5" id="menu-icon"></i>
@@ -123,10 +129,10 @@
         <!-- Mobile Nav -->
         <nav id="mobile-menu" class="md:hidden hidden px-4 pb-4">
           <div class="grid gap-2">
-            <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#home">خانه</a>
-            <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#features">ویژگی‌ها</a>
-            <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#stats">آمار</a>
-            <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#contact">تماس</a>
+            <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#home">{{ trans(key='nav_home_mobile', lang=lang) }}</a>
+            <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#features">{{ trans(key='nav_features_mobile', lang=lang) }}</a>
+            <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#stats">{{ trans(key='nav_stats_mobile', lang=lang) }}</a>
+            <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#contact">{{ trans(key='nav_contact', lang=lang) }}</a>
           </div>
         </nav>
       </div>
@@ -139,43 +145,38 @@
       <div class="grid lg:grid-cols-2 gap-10 items-center">
         <!-- Text -->
         <div class="space-y-7 animate-fadeUp">
-<!--          <div class="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-primary-100/70 dark:bg-primary-600/15 border border-primary-500/20 text-primary-700 dark:text-primary-300 w-fit">-->
-<!--            <i data-lucide="sparkles" class="h-4 w-4"></i>-->
-<!--            <span class="text-sm">آموزش هوشمند برای همه</span>-->
-<!--          </div>-->
-
           <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
-            آموزش هوشمند با
-            <span class="text-gradient">هوش مصنوعی</span>
+            {{ trans(key='hero_tagline_p1', lang=lang) }}
+            <span class="text-gradient">{{ trans(key='hero_tagline_p2', lang=lang) }}</span>
           </h1>
 
           <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-            نامه، پلتفرم آموزشی نوآورانه که با بهره‌گیری از هوش مصنوعی، آموزش باکیفیت و مقرون‌به‌صرفه را برای همه دانش‌آموزان ایران فراهم می‌کند.
+            {{ trans(key='hero_description', lang=lang) }}
           </p>
 
           <div class="flex flex-wrap gap-4">
             <a href="#features" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white bg-gradient-to-l from-primary-600 via-accent-600 to-secondary-600 shadow-glow hover:shadow-xl transition">
-              شروع یادگیری
+              {{ trans(key='cta_start_learning', lang=lang) }}
               <i data-lucide="arrow-left" class="h-5 w-5"></i>
             </a>
             <a href="#features" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-300/60 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/5 transition">
-              مشاهده ویژگی‌ها
+              {{ trans(key='cta_view_features', lang=lang) }}
               <i data-lucide="play" class="h-5 w-5"></i>
             </a>
           </div>
 
           <div class="grid grid-cols-3 gap-6 pt-4">
             <div class="rounded-2xl p-4 bg-white/70 dark:bg-white/5 border border-white/30 dark:border-white/10 backdrop-glass text-center">
-              <div class="text-2xl sm:text-3xl font-extrabold text-primary-600">۱۶ میلیون</div>
-              <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">دانش‌آموز ایرانی</div>
+              <div class="text-2xl sm:text-3xl font-extrabold text-primary-600">{{ trans(key='stats_students_count', lang=lang) }}</div>
+              <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{{ trans(key='stats_students_label', lang=lang) }}</div>
             </div>
             <div class="rounded-2xl p-4 bg-white/70 dark:bg-white/5 border border-white/30 dark:border-white/10 backdrop-glass text-center">
-              <div class="text-2xl sm:text-3xl font-extrabold text-secondary-600">۱–۱۲</div>
-              <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">پایه تحصیلی</div>
+              <div class="text-2xl sm:text-3xl font-extrabold text-secondary-600">{{ trans(key='stats_grade_range', lang=lang) }}</div>
+              <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{{ trans(key='stats_grade_label', lang=lang) }}</div>
             </div>
             <div class="rounded-2xl p-4 bg-white/70 dark:bg-white/5 border border-white/30 dark:border-white/10 backdrop-glass text-center">
-              <div class="text-2xl sm:text-3xl font-extrabold text-accent-600">۲۴/۷</div>
-              <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">دسترسی آموزش</div>
+              <div class="text-2xl sm:text-3xl font-extrabold text-accent-600">{{ trans(key='stats_access_value', lang=lang) }}</div>
+              <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{{ trans(key='stats_access_label', lang=lang) }}</div>
             </div>
           </div>
         </div>
@@ -184,20 +185,8 @@
         <div class="relative">
           <div class="absolute -inset-6 bg-gradient-to-tr from-primary-600/20 via-accent-600/15 to-secondary-600/20 rounded-[32px] blur-2xl -z-10"></div>
           <div class="rounded-3xl overflow-hidden border border-white/30 dark:border-white/10 shadow-soft animate-float">
-            <div id="61271067189"><script type="text/JavaScript" src="https://www.aparat.com/embed/uqbd1yy?data[rnddiv]=61271067189&data[responsive]=yes"></script></div>
+<!--            <div id="61271067189"><script type="text/JavaScript" src="https://www.aparat.com/embed/uqbd1yy?data[rnddiv]=61271067189&data[responsive]=yes"></script></div>-->
           </div>
-
-<!--          <div class="hidden sm:flex gap-3 absolute -bottom-6 left-1/2 -translate-x-1/2">-->
-<!--            <div class="px-4 py-2 rounded-xl bg-white/80 dark:bg-white/10 border border-white/30 dark:border-white/10 backdrop-glass text-sm w-fit">-->
-<!--              <i data-lucide="brain" class="inline h-4 w-4 text-primary-600 ml-1"></i> هوش مصنوعی-->
-<!--            </div>-->
-<!--            <div class="px-4 py-2 rounded-xl bg-white/80 dark:bg-white/10 border border-white/30 dark:border-white/10 backdrop-glass text-sm">-->
-<!--              <i data-lucide="users" class="inline h-4 w-4 text-secondary-600 ml-1"></i> آموزش گروهی-->
-<!--            </div>-->
-<!--            <div class="px-4 py-2 rounded-xl bg-white/80 dark:bg-white/10 border border-white/30 dark:border-white/10 backdrop-glass text-sm">-->
-<!--              <i data-lucide="book-open" class="inline h-4 w-4 text-accent-600 ml-1"></i> محتوای جامع-->
-<!--            </div>-->
-<!--          </div>-->
         </div>
       </div>
     </div>
@@ -208,10 +197,10 @@
     <div class="container">
       <div class="text-center space-y-4 mb-12">
         <h2 class="text-3xl sm:text-4xl font-extrabold">
-          ویژگی‌های منحصر به فرد <span class="text-gradient">نامه</span>
+          {{ trans(key='features_heading', lang=lang) }} <span class="text-gradient">{{ trans(key='features_brand', lang=lang) }}</span>
         </h2>
         <p class="text-lg text-gray-600 dark:text-gray-300">
-          با تازه‌ترین فناوری‌های هوش مصنوعی، تجربه‌ای نوین از یادگیری را برای دانش‌آموزان ایرانی خلق می‌کنیم.
+          {{ trans(key='features_intro', lang=lang) }}
         </p>
       </div>
 
@@ -221,48 +210,48 @@
           <div class="w-12 h-12 rounded-xl bg-primary-600/15 flex items-center justify-center mb-4">
             <i data-lucide="brain" class="h-6 w-6 text-primary-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">هوش مصنوعی پیشرفته</h3>
-          <p class="text-gray-600 dark:text-gray-300">آموزش شخصی‌سازی شده بر اساس نیاز و سرعت یادگیری شما.</p>
+          <h3 class="text-xl font-bold mb-2">{{ trans(key='feature_ai_title', lang=lang) }}</h3>
+          <p class="text-gray-600 dark:text-gray-300">{{ trans(key='feature_ai_desc', lang=lang) }}</p>
         </div>
 
         <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
           <div class="w-12 h-12 rounded-xl bg-secondary-600/15 flex items-center justify-center mb-4">
             <i data-lucide="clock" class="h-6 w-6 text-secondary-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">آموزش ۲۴ ساعته</h3>
-          <p class="text-gray-600 dark:text-gray-300">دسترسی همیشگی به محتوای آموزشی با کیفیت بالا.</p>
+          <h3 class="text-xl font-bold mb-2">{{ trans(key='feature_24h_title', lang=lang) }}</h3>
+          <p class="text-gray-600 dark:text-gray-300">{{ trans(key='feature_24h_desc', lang=lang) }}</p>
         </div>
 
         <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
           <div class="w-12 h-12 rounded-xl bg-accent-600/15 flex items-center justify-center mb-4">
             <i data-lucide="gamepad-2" class="h-6 w-6 text-accent-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">بازی‌وارسازی</h3>
-          <p class="text-gray-600 dark:text-gray-300">یادگیری جذاب با پاداش‌ها، مراحل و چالش‌های هوشمند.</p>
+          <h3 class="text-xl font-bold mb-2">{{ trans(key='feature_gamification_title', lang=lang) }}</h3>
+          <p class="text-gray-600 dark:text-gray-300">{{ trans(key='feature_gamification_desc', lang=lang) }}</p>
         </div>
 
         <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
           <div class="w-12 h-12 rounded-xl bg-primary-600/15 flex items-center justify-center mb-4">
             <i data-lucide="users" class="h-6 w-6 text-primary-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">کلاس‌های گروهی آنلاین</h3>
-          <p class="text-gray-600 dark:text-gray-300">تعامل و یادگیری جمعی با هم‌کلاسی‌ها و مربیان.</p>
+          <h3 class="text-xl font-bold mb-2">{{ trans(key='feature_group_classes_title', lang=lang) }}</h3>
+          <p class="text-gray-600 dark:text-gray-300">{{ trans(key='feature_group_classes_desc', lang=lang) }}</p>
         </div>
 
         <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
           <div class="w-12 h-12 rounded-xl bg-secondary-600/15 flex items-center justify-center mb-4">
             <i data-lucide="book-open" class="h-6 w-6 text-secondary-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">محتوای جامع</h3>
-          <p class="text-gray-600 dark:text-gray-300">پوشش کامل دروس از پایه اول تا دوازدهم.</p>
+          <h3 class="text-xl font-bold mb-2">{{ trans(key='feature_comprehensive_content_title', lang=lang) }}</h3>
+          <p class="text-gray-600 dark:text-gray-300">{{ trans(key='feature_comprehensive_content_desc', lang=lang) }}</p>
         </div>
 
         <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
           <div class="w-12 h-12 rounded-xl bg-accent-600/15 flex items-center justify-center mb-4">
             <i data-lucide="award" class="h-6 w-6 text-accent-600"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">آمادگی کنکور</h3>
-          <p class="text-gray-600 dark:text-gray-300">تمرین‌های تخصصی و مسیر یادگیری برای موفقیت در آزمون‌ها.</p>
+          <h3 class="text-xl font-bold mb-2">{{ trans(key='feature_exam_prep_title', lang=lang) }}</h3>
+          <p class="text-gray-600 dark:text-gray-300">{{ trans(key='feature_exam_prep_desc', lang=lang) }}</p>
         </div>
       </div>
 
@@ -270,46 +259,46 @@
       <div class="grid lg:grid-cols-2 gap-10 items-center mt-16">
         <div class="space-y-4">
           <div class="rounded-2xl overflow-hidden border border-white/30 dark:border-white/10 shadow-soft">
-            <img class="w-full h-[420px] object-cover" src="assets/images/ai.gif" alt="AI Learning Feature" />
+            <img class="w-full h-[420px] object-cover" src="assets/images/ai.gif" />
           </div>
           <h3 class="text-2xl font-extrabold flex items-center gap-2">
-            یادگیری هوشمند با
+            {{ trans(key='ai_subheading_p1', lang=lang) }}
             <span class="inline-flex items-center gap-2 text-gradient">
               <i data-lucide="brain" class="h-7 w-7 text-primary-600"></i>
-              هوش مصنوعی
+              {{ trans(key='ai_subheading_p2', lang=lang) }}
             </span>
           </h3>
           <p class="text-gray-600 dark:text-gray-300">
-            هر دانش‌آموز نامه یک معلم خصوصی هوشمند همیشه در اختیار دارد و می‌تواند تمام سوالات درسی خود را از او بپرسد.
+            {{ trans(key='ai_tutor_description', lang=lang) }}
           </p>
           <div class="flex gap-4">
             <span class="inline-flex items-center gap-2 text-sm">
-              <i data-lucide="trending-up" class="h-5 w-5 text-green-500"></i> پیشرفت سریع‌تر
+              <i data-lucide="trending-up" class="h-5 w-5 text-green-500"></i> {{ trans(key='benefit_faster_progress', lang=lang) }}
             </span>
             <span class="inline-flex items-center gap-2 text-sm">
-              <i data-lucide="target" class="h-5 w-5 text-primary-600"></i> آموزش دقیق
+              <i data-lucide="target" class="h-5 w-5 text-primary-600"></i> {{ trans(key='benefit_precise_teaching', lang=lang) }}
             </span>
           </div>
         </div>
 
         <div class="space-y-4">
-          <h3 class="text-2xl font-extrabold">دسترسی آسان از هر مکان</h3>
+          <h3 class="text-2xl font-extrabold">{{ trans(key='benefit_easy_access', lang=lang) }}</h3>
           <p class="text-gray-600 dark:text-gray-300">
-            با طراحی واکنش‌گرا و رابط کاربری ساده، دانش‌آموزان می‌توانند از هر دستگاه و در هر زمان به محتوای آموزشی دسترسی پیدا کنند. آموزش دیگر محدود به زمان و مکان نیست.
+            {{ trans(key='benefit_access_description', lang=lang) }}
           </p>
           <div class="flex gap-4">
             <span class="inline-flex items-center gap-2 text-sm">
-              <i data-lucide="smartphone" class="h-5 w-5 text-secondary-600"></i> موبایل و تبلت
+              <i data-lucide="smartphone" class="h-5 w-5 text-secondary-600"></i> {{ trans(key='device_mobile_tablet', lang=lang) }}
             </span>
             <span class="inline-flex items-center gap-2 text-sm">
-              <i data-lucide="laptop" class="h-5 w-5 text-primary-600"></i> رایانه
+              <i data-lucide="laptop" class="h-5 w-5 text-primary-600"></i> {{ trans(key='device_desktop', lang=lang) }}
             </span>
             <span class="inline-flex items-center gap-2 text-sm">
-              <i data-lucide="clock" class="h-5 w-5 text-green-500"></i> ۲۴ ساعته
+              <i data-lucide="clock" class="h-5 w-5 text-green-500"></i> {{ trans(key='access_24h', lang=lang) }}
             </span>
           </div>
           <div class="rounded-2xl overflow-hidden border border-white/30 dark:border-white/10 shadow-soft">
-            <img src="assets/images/desktop.png" class="w-full" alt="Desktop Screenshot" />
+            <img src="assets/images/desktop.png" class="w-full" alt="{{ trans(key='device_desktop', lang=lang) }}" />
           </div>
         </div>
       </div>
@@ -321,10 +310,10 @@
     <div class="container">
       <div class="text-center space-y-4 mb-12">
         <h2 class="text-3xl sm:text-4xl font-extrabold">
-          آمار و ارقام <span class="text-gradient">چشمگیر</span>
+          {{ trans(key='stats_and_figures_heading', lang=lang) }} <span class="text-gradient">{{ trans(key='stats_and_figures_subheading', lang=lang) }}</span>
         </h2>
         <p class="text-lg text-gray-600 dark:text-gray-300">
-          نگاهی به پتانسیل عظیم بازار آموزش ایران و فرصت‌های پیش روی نامه
+          {{ trans(key='market_potential_intro', lang=lang) }}
         </p>
       </div>
 
@@ -333,66 +322,66 @@
           <div class="mx-auto w-12 h-12 rounded-xl bg-primary-600 text-white flex items-center justify-center mb-3">
             <i data-lucide="users" class="h-6 w-6"></i>
           </div>
-          <div class="text-2xl font-extrabold">۱۶ میلیون</div>
-          <div class="text-primary-600 font-bold mt-1">دانش‌آموز ایرانی</div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">بازار هدف بزرگ ما</p>
+          <div class="text-2xl font-extrabold">{{ trans(key='market_total_students_value', lang=lang) }}</div>
+          <div class="text-primary-600 font-bold mt-1">{{ trans(key='market_total_students_label', lang=lang) }}</div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ trans(key='market_target_heading', lang=lang) }}</p>
         </div>
 
         <div class="rounded-2xl p-6 text-center border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass">
           <div class="mx-auto w-12 h-12 rounded-xl bg-secondary-600 text-white flex items-center justify-center mb-3">
             <i data-lucide="pencil-off" class="h-6 w-6"></i>
           </div>
-          <div class="text-xl font-extrabold">دسترسی نداشتن</div>
-          <div class="text-primary-600 font-bold mt-1">بسیاری از دانش‌آموزان</div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">به منابع درسی و کلاس‌های خصوصی</p>
+          <div class="text-xl font-extrabold">{{ trans(key='barrier_no_access_label', lang=lang) }}</div>
+          <div class="text-primary-600 font-bold mt-1">{{ trans(key='barrier_phrase_part1', lang=lang) }}</div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ trans(key='barrier_phrase_part2', lang=lang) }}</p>
         </div>
 
         <div class="rounded-2xl p-6 text-center border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass">
           <div class="mx-auto w-12 h-12 rounded-xl bg-primary-600 text-white flex items-center justify-center mb-3">
             <i data-lucide="book-open" class="h-6 w-6"></i>
           </div>
-          <div class="text-2xl font-extrabold">۱۲ پایه</div>
-          <div class="text-primary-600 font-bold mt-1">تحصیلی</div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">پوشش کامل دوران تحصیل</p>
+          <div class="text-2xl font-extrabold">{{ trans(key='schooling_years_value', lang=lang) }}</div>
+          <div class="text-primary-600 font-bold mt-1">{{ trans(key='schooling_label', lang=lang) }}</div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ trans(key='schooling_coverage', lang=lang) }}</p>
         </div>
 
         <div class="rounded-2xl p-6 text-center border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass">
           <div class="mx-auto w-12 h-12 rounded-xl bg-primary-600 text-white flex items-center justify-center mb-3">
             <i data-lucide="award" class="h-6 w-6"></i>
           </div>
-          <div class="text-2xl font-extrabold">۱٪ بازار</div>
-          <div class="text-primary-600 font-bold mt-1">هدف اولیه</div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">۱۶۰ هزار دانش‌آموز</p>
+          <div class="text-2xl font-extrabold">{{ trans(key='market_percentage_value', lang=lang) }}</div>
+          <div class="text-primary-600 font-bold mt-1">{{ trans(key='market_initial_target_label', lang=lang) }}</div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ trans(key='market_target_number', lang=lang) }}</p>
         </div>
       </div>
 
       <div class="rounded-3xl p-8 lg:p-12 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass">
         <div class="text-center space-y-6">
-          <h3 class="text-2xl sm:text-3xl font-extrabold">مدل درآمدزایی نامه</h3>
+          <h3 class="text-2xl sm:text-3xl font-extrabold">{{ trans(key='revenue_model_heading', lang=lang) }}</h3>
           <div class="grid md:grid-cols-4 gap-5 max-w-4xl mx-auto">
             <div>
-              <div class="text-xl font-extrabold text-primary-600">۱٪ بازار</div>
-              <div class="text-gray-600 dark:text-gray-300">۱۶۰ هزار دانش‌آموز از ۱۶ میلیون</div>
+              <div class="text-xl font-extrabold text-primary-600">{{ trans(key='market_percentage_value_dup', lang=lang) }}</div>
+              <div class="text-gray-600 dark:text-gray-300">{{ trans(key='market_target_statement', lang=lang) }}</div>
             </div>
             <div>
-              <div class="text-xl font-extrabold text-secondary-600">۲۰۰ هزار تومان</div>
-              <div class="text-gray-600 dark:text-gray-300">متوسط اشتراک ماهانه</div>
+              <div class="text-xl font-extrabold text-secondary-600">{{ trans(key='avg_subscription_value', lang=lang) }}</div>
+              <div class="text-gray-600 dark:text-gray-300">{{ trans(key='avg_subscription_label', lang=lang) }}</div>
             </div>
             <div>
-              <div class="text-xl font-extrabold text-yellow-500">۳۲ میلیارد تومان</div>
-              <div class="text-gray-600 dark:text-gray-300">درآمد ماهانه پیش‌بینی‌شده</div>
+              <div class="text-xl font-extrabold text-yellow-500">{{ trans(key='predicted_revenue_value', lang=lang) }}</div>
+              <div class="text-gray-600 dark:text-gray-300">{{ trans(key='predicted_revenue_label', lang=lang) }}</div>
             </div>
             <div>
-              <div class="text-xl font-extrabold text-red-500">۲ میلیارد تومان</div>
-              <div class="text-gray-600 dark:text-gray-300">هزینه ماهانه پیش‌بینی‌شده</div>
+              <div class="text-xl font-extrabold text-red-500">{{ trans(key='predicted_cost_value', lang=lang) }}</div>
+              <div class="text-gray-600 dark:text-gray-300">{{ trans(key='predicted_cost_label', lang=lang) }}</div>
             </div>
           </div>
           <div>
-            <div class="text-3xl font-extrabold text-green-500">۳۰ میلیارد تومان</div>
-            <div class="text-gray-700 dark:text-gray-200 text-lg">سود ماهانه</div>
+            <div class="text-3xl font-extrabold text-green-500">{{ trans(key='predicted_profit_value', lang=lang) }}</div>
+            <div class="text-gray-700 dark:text-gray-200 text-lg">{{ trans(key='profit_label', lang=lang) }}</div>
           </div>
           <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            با در نظرگیری تنها ۱٪ از دانش‌آموزان ایران به عنوان کاربران نامه، پتانسیل درآمدزایی قابل توجهی وجود دارد.
+            {{ trans(key='market_note', lang=lang) }}
           </p>
         </div>
       </div>
@@ -405,48 +394,21 @@
       <div class="grid lg:grid-cols-4 gap-10">
         <div class="space-y-5">
           <div class="flex items-center gap-2">
-            <img src="assets/images/logo.png" class="h-12 w-12 rounded-xl" alt="Logo" />
-            <span class="text-3xl font-extrabold text-gradient">نامه</span>
+            <img src="assets/images/logo.png" class="h-12 w-12 rounded-xl" alt="{{ trans(key='brand_short', lang=lang) }}" />
+            <span class="text-3xl font-extrabold text-gradient">{{ trans(key='brand_short', lang=lang) }}</span>
           </div>
           <p class="text-gray-600 dark:text-gray-300">
-            پلتفرم آموزش هوشمند که با استفاده از هوش مصنوعی، آینده آموزش ایران را می‌سازد. یادگیری برای همه، در هر زمان و هر مکان.
+            {{ trans(key='about_summary', lang=lang) }}
           </p>
         </div>
-
-<!--        <div class="lg:col-span-3 grid sm:grid-cols-3 gap-8">-->
-<!--          <div>-->
-<!--            <h4 class="font-bold mb-3">محصول</h4>-->
-<!--            <ul class="space-y-2 text-gray-600 dark:text-gray-300">-->
-<!--              <li><a href="#features" class="hover:text-primary-600 dark:hover:text-primary-400">ویژگی‌ها</a></li>-->
-<!--              <li><a href="#stats" class="hover:text-primary-600 dark:hover:text-primary-400">آمار</a></li>-->
-<!--              <li><a href="#home" class="hover:text-primary-600 dark:hover:text-primary-400">نسخه آزمایشی</a></li>-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <h4 class="font-bold mb-3">شرکت</h4>-->
-<!--            <ul class="space-y-2 text-gray-600 dark:text-gray-300">-->
-<!--              <li><a href="#" class="hover:text-primary-600 dark:hover:text-primary-400">درباره ما</a></li>-->
-<!--              <li><a href="#" class="hover:text-primary-600 dark:hover:text-primary-400">تیم</a></li>-->
-<!--              <li><a href="#" class="hover:text-primary-600 dark:hover:text-primary-400">فرصت‌های شغلی</a></li>-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <h4 class="font-bold mb-3">پشتیبانی</h4>-->
-<!--            <ul class="space-y-2 text-gray-600 dark:text-gray-300">-->
-<!--              <li><a href="#contact" class="hover:text-primary-600 dark:hover:text-primary-400">تماس با ما</a></li>-->
-<!--              <li><a href="#" class="hover:text-primary-600 dark:hover:text-primary-400">گزارش مشکل</a></li>-->
-<!--              <li><a href="#" class="hover:text-primary-600 dark:hover:text-primary-400">راهنما</a></li>-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </div>-->
       </div>
 
       <div class="mt-10 pt-6 border-t border-white/30 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-gray-600 dark:text-gray-300">
-        <div>© ۱۴۰۴ نامه. تمامی حقوق محفوظ است.</div>
+        <div>{{ trans(key='copyright', lang=lang) }}</div>
         <div class="flex items-center gap-2">
-          <span>ساخته شده با</span>
+          <span>{{ trans(key='built_with_label', lang=lang) }}</span>
           <i data-lucide="heart" class="h-4 w-4 text-red-500 fill-current"></i>
-          <span>توسط <a class="underline hover:text-primary-600" href="https://smartnima.com/">نیما فنی اصل</a></span>
+          <span>{{ trans(key='by_label', lang=lang) }} <a class="underline hover:text-primary-600" href="https://smartnima.com/">{{ trans(key='author_name', lang=lang) }}</a></span>
         </div>
       </div>
     </div>

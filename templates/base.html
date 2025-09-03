@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{% if lang == 'fa' or lang == 'ar' %}rtl{% else %}ltr{% endif %}">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{{ trans(key='site_title_full', lang=lang) }}</title>
+    <meta name="description" content="{{ trans(key='hero_description', lang=lang) }}"/>
+
+    <!-- Tailwind 3 -->
+    <script src="/assets/code/tailwind.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="/assets/code/lucide.js"></script>
+
+    <!-- HTMX -->
+    <script src="/assets/code/htmx.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/assets/code/index.css"/>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    container: {center: true, padding: '1rem'},
+                    fontFamily: {
+                        sans: ['Arad', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        },
+                        secondary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c'
+                        },
+                        accent: {
+                            500: '#a855f7',
+                            600: '#9333ea'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-hero':
+                            'radial-gradient(1200px 600px at 80% -10%, rgba(59,130,246,0.25), transparent), radial-gradient(800px 500px at 20% 20%, rgba(168,85,247,0.18), transparent), linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0))',
+                        'gradient-hero-dark':
+                            'radial-gradient(1200px 600px at 80% -10%, rgba(59,130,246,0.25), transparent), radial-gradient(800px 500px at 20% 20%, rgba(168,85,247,0.25), transparent), linear-gradient(180deg, rgba(17,24,39,0.9), rgba(17,24,39,0))',
+                        'glass':
+                            'linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.25))',
+                        'glass-dark':
+                            'linear-gradient(180deg, rgba(17,24,39,0.6), rgba(17,24,39,0.25))'
+                    },
+                    boxShadow: {
+                        glow: '0 10px 40px -10px rgba(59,130,246,0.35)',
+                        soft: '0 12px 32px -12px rgba(0,0,0,0.25)'
+                    },
+                    keyframes: {
+                        float: {'0%, 100%': {transform: 'translateY(0)'}, '50%': {transform: 'translateY(-8px)'}},
+                        fadeUp: {
+                            '0%': {opacity: 0, transform: 'translateY(18px)'},
+                            '100%': {opacity: 1, transform: 'translateY(0)'}
+                        }
+                    },
+                    animation: {
+                        float: 'float 6s ease-in-out infinite',
+                        fadeUp: 'fadeUp 0.8s ease forwards'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .text-gradient {
+            background: linear-gradient(90deg, #2563eb, #a855f7, #f97316);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .backdrop-glass {
+            backdrop-filter: saturate(160%) blur(16px);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 antialiased">
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const savedLang = localStorage.getItem('language');
+        let lang;
+
+        if (!savedLang) {
+            if (window.location.href.includes("/en")) {
+                lang = 'en';
+            } else if (window.location.href.includes("/ar")) {
+                lang = 'ar';
+            } else {
+                const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+                if (timeZone === 'Asia/Tehran') {
+                    lang = 'fa';
+                } else if (timeZone === 'Asia/Dubai') {
+                    lang = 'ar';
+                } else {
+                    lang = 'en';
+                }
+            }
+
+            localStorage.setItem('language', lang);
+        } else {
+            lang = savedLang;
+        }
+
+        // Set HTML attributes
+        document.documentElement.lang = lang;
+        document.documentElement.dir = (lang === 'fa' || lang === 'ar') ? 'rtl' : 'ltr';
+
+        // Update URL without reload
+        const currentPath = window.location.pathname;
+        let newPath = (lang === 'fa') ? '/' : '/' + lang + '/';
+
+        // Only update URL if it doesn't already match the language
+        if (currentPath !== newPath && !currentPath.includes('/' + lang + '/')) {
+            window.history.replaceState({}, '', newPath);
+        }
+
+        // Now manually trigger the HTMX request with the correct URL
+        const bodyUrl = (lang === 'fa') ? '/body' : '/' + lang + '/body';
+        htmx.ajax('GET', bodyUrl, { target: 'body', swap: 'outerHTML'});
+    });
+</script>
+</body>
+</html>
