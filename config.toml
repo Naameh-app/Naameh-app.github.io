@@ -1,0 +1,328 @@
+# The URL the site will be built for
+base_url = "https://naameh.me"
+
+default_language = "fa"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = false
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = false
+
+[languages]
+[languages.fa]
+title = "نامه - معلم هوشمند"
+
+[languages.fa.translations]
+site_title_full = "نامه - نرم افزار معلم هوشمند"
+brand_short = "نامه"
+
+nav_home_desktop = "خانه"
+nav_features_desktop = "ویژگی ها"
+nav_stats_desktop = "آمار"
+nav_about_desktop = "درباره"
+
+nav_home_mobile = "خانه"
+nav_features_mobile = "ویژگی ها"
+nav_stats_mobile = "آمار"
+nav_contact = "تماس"
+
+hero_tagline_p1 = "آموزش هوشمند با"
+hero_tagline_p2 = "هوش مصنوعی"
+hero_description = "نامه، پلتفرم آموزشی نوآورانه که با بهره گیری از هوش مصنوعی، آموزش باکیفیت و مقرون به صرفه را برای همه دانش آموزان ایران فراهم می کند."
+cta_start_learning = "شروع یادگیری"
+cta_view_features = "مشاهده ویژگی ها"
+
+stats_students_count = "۱۶ میلیون"
+stats_students_label = "دانش آموز ایرانی"
+stats_grade_range = "۱–۱۲"
+stats_grade_label = "پایه تحصیلی"
+stats_access_value = "۲۴/۷"
+stats_access_label = "دسترسی آموزش"
+
+features_heading = "ویژگی های منحصر به فرد"
+features_brand = "نامه"
+features_intro = "با تازه ترین فناوری های هوش مصنوعی، تجربه ای نوین از یادگیری را برای دانش آموزان ایرانی خلق می کنیم."
+
+feature_ai_title = "هوش مصنوعی پیشرفته"
+feature_ai_desc = "آموزش شخصی سازی شده بر اساس نیاز و سرعت یادگیری شما."
+feature_24h_title = "آموزش ۲۴ ساعته"
+feature_24h_desc = "دسترسی همیشگی به محتوای آموزشی با کیفیت بالا."
+feature_gamification_title = "بازی وارسازی"
+feature_gamification_desc = "یادگیری جذاب با پاداش ها، مراحل و چالش های هوشمند."
+feature_group_classes_title = "کلاس های گروهی آنلاین"
+feature_group_classes_desc = "تعامل و یادگیری جمعی با هم کلاسی ها و مربیان."
+feature_comprehensive_content_title = "محتوای جامع"
+feature_comprehensive_content_desc = "پوشش کامل دروس از پایه اول تا دوازدهم."
+feature_exam_prep_title = "آمادگی کنکور"
+feature_exam_prep_desc = "تمرین های تخصصی و مسیر یادگیری برای موفقیت در آزمون ها."
+
+ai_subheading_p1 = "یادگیری هوشمند با"
+ai_subheading_p2 = "هوش مصنوعی"
+ai_tutor_description = "هر دانش آموز نامه یک معلم خصوصی هوشمند همیشه در اختیار دارد و می تواند تمام سوالات درسی خود را از او بپرسد."
+
+benefit_faster_progress = "پیشرفت سریع تر"
+benefit_precise_teaching = "آموزش دقیق"
+benefit_easy_access = "دسترسی آسان از هر مکان"
+benefit_access_description = "با طراحی واکنش گرا و رابط کاربری ساده، دانش آموزان می توانند از هر دستگاه و در هر زمان به محتوای آموزشی دسترسی پیدا کنند. آموزش دیگر محدود به زمان و مکان نیست."
+
+device_mobile_tablet = "موبایل و تبلت"
+device_desktop = "رایانه"
+access_24h = "۲۴ ساعته"
+
+stats_and_figures_heading = "آمار و ارقام"
+stats_and_figures_subheading = "چشمگیر"
+market_potential_intro = "نگاهی به پتانسیل عظیم بازار آموزش ایران و فرصت های پیش روی نامه"
+
+market_total_students_value = "۱۶ میلیون"
+market_total_students_label = "دانش آموز ایرانی"
+market_target_heading = "بازار هدف بزرگ ما"
+
+barrier_no_access_label = "دسترسی نداشتن"
+barrier_phrase_part1 = "بسیاری از دانش آموزان"
+barrier_phrase_part2 = "به منابع درسی و کلاس های خصوصی"
+
+schooling_years_value = "۱۲ پایه"
+schooling_label = "تحصیلی"
+schooling_coverage = "پوشش کامل دوران تحصیل"
+
+market_percentage_value = "۱٪ بازار"
+market_initial_target_label = "هدف اولیه"
+market_target_number = "۱۶۰ هزار دانش آموز"
+
+revenue_model_heading = "مدل درآمدزایی نامه"
+market_percentage_value_dup = "۱٪ بازار"
+market_target_statement = "۱۶۰ هزار دانش آموز از ۱۶ میلیون"
+
+avg_subscription_value = "۲۰۰ هزار تومان"
+avg_subscription_label = "متوسط اشتراک ماهانه"
+predicted_revenue_value = "۳۲ میلیارد تومان"
+predicted_revenue_label = "درآمد ماهانه پیش بینی شده"
+predicted_cost_value = "۲ میلیارد تومان"
+predicted_cost_label = "هزینه ماهانه پیش بینی شده"
+predicted_profit_value = "۳۰ میلیارد تومان"
+profit_label = "سود ماهانه"
+
+market_note = "با در نظرگیری تنها ۱٪ از دانش آموزان ایران به عنوان کاربران نامه، پتانسیل درآمدزایی قابل توجهی وجود دارد."
+
+brand_repeat = "نامه"
+about_summary = "پلتفرم آموزش هوشمند که با استفاده از هوش مصنوعی، آینده آموزش ایران را می سازد. یادگیری برای همه، در هر زمان و هر مکان."
+
+copyright = "© ۱۴۰۴ نامه. تمامی حقوق محفوظ است."
+built_with_label = "ساخته شده با"
+by_label = "توسط"
+author_name = "نیما فنی اصل"
+
+[languages.en]
+title = "Naameh - Smart Teacher"
+
+[languages.en.translations]
+site_title_full = "Naameh - Intelligent Tutor App"
+brand_short = "Naameh"
+
+nav_home_desktop = "Home"
+nav_features_desktop = "Features"
+nav_stats_desktop = "Statistics"
+nav_about_desktop = "About"
+
+nav_home_mobile = "Home"
+nav_features_mobile = "Features"
+nav_stats_mobile = "Statistics"
+nav_contact = "Contact"
+
+hero_tagline_p1 = "Intelligent education with"
+hero_tagline_p2 = "Artificial Intelligence"
+hero_description = "Naameh, an innovative educational platform that leverages artificial intelligence to provide high-quality, affordable education for all Iranian students."
+cta_start_learning = "Start learning"
+cta_view_features = "View features"
+
+stats_students_count = "16 million"
+stats_students_label = "Iranian students"
+stats_grade_range = "1–12"
+stats_grade_label = "Grade levels"
+stats_access_value = "24/7"
+stats_access_label = "Access to education"
+
+features_heading = "The Unique features of"
+features_brand = "Naameh"
+features_intro = "Using the latest AI technologies, we create a new learning experience for Iranian students."
+
+feature_ai_title = "Advanced Artificial Intelligence"
+feature_ai_desc = "Personalized instruction based on your needs and learning pace."
+feature_24h_title = "24/7 Learning"
+feature_24h_desc = "Constant access to high-quality educational content."
+feature_gamification_title = "Gamification"
+feature_gamification_desc = "Engaging learning with rewards, levels, and intelligent challenges."
+feature_group_classes_title = "Online Group Classes"
+feature_group_classes_desc = "Interactive, collective learning with classmates and tutors."
+feature_comprehensive_content_title = "Comprehensive Content"
+feature_comprehensive_content_desc = "Complete coverage of subjects from grade one through twelve."
+feature_exam_prep_title = "Entrance Exam Preparation"
+feature_exam_prep_desc = "Specialized practice and learning pathways to succeed in exams."
+
+ai_subheading_p1 = "Smart learning with"
+ai_subheading_p2 = "Artificial Intelligence"
+ai_tutor_description = "Every Naameh student has an intelligent private tutor available at all times and can ask all their academic questions."
+
+benefit_faster_progress = "Faster progress"
+benefit_precise_teaching = "Precise instruction"
+benefit_easy_access = "Easy access from anywhere"
+benefit_access_description = "With responsive design and a simple user interface, students can access educational content from any device at any time. Education is no longer limited by time and place."
+
+device_mobile_tablet = "Mobile and tablet"
+device_desktop = "Desktop computer"
+access_24h = "24/7"
+
+stats_and_figures_heading = "Stats and Figures."
+stats_and_figures_subheading = "Impressive"
+market_potential_intro = "A look at the huge potential of Iran's education market and the opportunities ahead for Naameh"
+
+market_total_students_value = "16 million"
+market_total_students_label = "Iranian students"
+market_target_heading = "Our large target market"
+
+barrier_no_access_label = "Lack of access"
+barrier_phrase_part1 = "Many students"
+barrier_phrase_part2 = "to educational resources and private tutoring"
+
+schooling_years_value = "12 grades"
+schooling_label = "Schooling"
+schooling_coverage = "Full coverage of the school years"
+
+market_percentage_value = "1% of the market"
+market_initial_target_label = "Initial target"
+market_target_number = "160,000 students"
+
+revenue_model_heading = "Naameh's revenue model"
+market_percentage_value_dup = "1% of the market"
+market_target_statement = "160,000 students out of 16 million"
+
+avg_subscription_value = "200,000 Toman"
+avg_subscription_label = "Average monthly subscription"
+predicted_revenue_value = "32 billion Toman"
+predicted_revenue_label = "Predicted monthly revenue"
+predicted_cost_value = "2 billion Toman"
+predicted_cost_label = "Predicted monthly cost"
+predicted_profit_value = "30 billion Toman"
+profit_label = "Monthly profit"
+
+market_note = "Considering only 1% of Iran's students as Naameh users, there is significant revenue potential."
+
+brand_repeat = "Naameh"
+about_summary = "An intelligent education platform that, using artificial intelligence, builds the future of education in Iran. Learning for everyone, anytime, anywhere."
+
+copyright = "© 1404 Naameh. All rights reserved."
+built_with_label = "Built with"
+by_label = "by"
+author_name = "Nima Fanniasl"
+
+[languages.ar]
+title = "نامه - المعلم الذكي"
+
+[languages.ar.translations]
+site_title_full = "نامه - تطبيق المعلم الذكي"
+brand_short = "نامه"
+
+nav_home_desktop = "الرئيسية"
+nav_features_desktop = "الميزات"
+nav_stats_desktop = "الإحصائيات"
+nav_about_desktop = "حول"
+
+nav_home_mobile = "الرئيسية"
+nav_features_mobile = "الميزات"
+nav_stats_mobile = "الإحصائيات"
+nav_contact = "اتصل"
+
+hero_tagline_p1 = "التعليم الذكي مع"
+hero_tagline_p2 = "الذكاء الاصطناعي"
+hero_description = "نامه، منصة تعليمية مبتكرة تستخدم الذكاء الاصطناعي لتقديم تعليم عالي الجودة وبأسعار معقولة لجميع الطلاب الإيرانيين."
+cta_start_learning = "ابدأ التعلم"
+cta_view_features = "عرض الميزات"
+
+stats_students_count = "١٦ مليون"
+stats_students_label = "طلاب إيرانيون"
+stats_grade_range = "١–١٢"
+stats_grade_label = "المراحل الدراسية"
+stats_access_value = "٢٤/٧"
+stats_access_label = "الوصول إلى التعليم"
+
+features_heading = "الميزات المميزة"
+features_brand = "نامه"
+features_intro = "باستخدام أحدث تقنيات الذكاء الاصطناعي، نقدم تجربة تعلم جديدة لطلاب إيران."
+
+feature_ai_title = "ذكاء اصطناعي متقدم"
+feature_ai_desc = "تعليم مخصّص بناءً على احتياجاتك وسرعة تعلمك."
+feature_24h_title = "التعلم على مدار ٢٤ ساعة"
+feature_24h_desc = "وصول دائم إلى محتوى تعليمي عالي الجودة."
+feature_gamification_title = "التحفيز بالألعاب"
+feature_gamification_desc = "تعلم ممتع مع مكافآت، مستويات وتحديات ذكية."
+feature_group_classes_title = "حصص جماعية عبر الإنترنت"
+feature_group_classes_desc = "تفاعل وتعلم جماعي مع زملاء الصف والمدرسين."
+feature_comprehensive_content_title = "محتوى شامل"
+feature_comprehensive_content_desc = "تغطية كاملة للمقررات من الصف الأول حتى الصف الثاني عشر."
+feature_exam_prep_title = "التحضير لامتحانات القبول"
+feature_exam_prep_desc = "تمارين متخصصة ومسارات تعلم للنجاح في الامتحانات."
+
+ai_subheading_p1 = "التعلم الذكي مع"
+ai_subheading_p2 = "الذكاء الاصطناعي"
+ai_tutor_description = "يحصل كل طالب في نامه على معلم خاص ذكي متاح دائمًا ويمكنه طرح جميع أسئلته الدراسية عليه."
+
+benefit_faster_progress = "تقدّم أسرع"
+benefit_precise_teaching = "تدريس دقيق"
+benefit_easy_access = "وصول سهل من أي مكان"
+benefit_access_description = "من خلال تصميم متجاوب وواجهة بسيطة، يمكن للطلاب الوصول إلى المحتوى التعليمي من أي جهاز وفي أي وقت. لم يعد التعليم مقصورًا على زمن أو مكان."
+
+device_mobile_tablet = "الهاتف المحمول والكمبيوتر اللوحي"
+device_desktop = "الكمبيوتر"
+access_24h = "متاح على مدار ٢٤ ساعة"
+
+stats_and_figures_heading = "الإحصاءات والأرقام"
+stats_and_figures_subheading = "ملحوظ"
+market_potential_intro = "نظرة على الإمكانات الهائلة لسوق التعليم في إيران والفرص المتاحة أمام نامه"
+
+market_total_students_value = "١٦ مليون"
+market_total_students_label = "طلاب إيرانيون"
+market_target_heading = "سوقنا المستهدف الكبير"
+
+barrier_no_access_label = "عدم الوصول"
+barrier_phrase_part1 = "العديد من الطلاب"
+barrier_phrase_part2 = "إلى الموارد التعليمية والدروس الخصوصية"
+
+schooling_years_value = "١٢ صفًا"
+schooling_label = "تعليمي"
+schooling_coverage = "تغطية كاملة للفترة التعليمية"
+
+market_percentage_value = "١٪ من السوق"
+market_initial_target_label = "الهدف الأولي"
+market_target_number = "١٦٠٬٠٠٠ طالب"
+
+revenue_model_heading = "نموذج إيرادات نامه"
+market_percentage_value_dup = "١٪ من السوق"
+market_target_statement = "١٦٠٬٠٠٠ طالب من أصل ١٦ مليون"
+
+avg_subscription_value = "٢٠٠٬٠٠٠ تومان"
+avg_subscription_label = "متوسط الاشتراك الشهري"
+predicted_revenue_value = "٣٢ مليار تومان"
+predicted_revenue_label = "الإيراد الشهري المتوقع"
+predicted_cost_value = "٢ مليار تومان"
+predicted_cost_label = "التكلفة الشهرية المتوقعة"
+predicted_profit_value = "٣٠ مليار تومان"
+profit_label = "الربح الشهري"
+
+market_note = "مع الأخذ بعين الاعتبار ١٪ فقط من طلاب إيران كمستخدمي نامه، هناك إمكانية كبيرة لتحقيق الإيرادات."
+
+brand_repeat = "نامه"
+about_summary = "منصة تعليمية ذكية تبني مستقبل التعليم في إيران باستخدام الذكاء الاصطناعي. التعليم للجميع، في أي وقت وفي أي مكان."
+
+copyright = "© ١٤٠٤ نامه. جميع الحقوق محفوظة."
+built_with_label = "بُني باستخدام"
+by_label = "بواسطة"
+author_name = "نيما فني اصل"
+
+[extra]
+# Put all your custom variables here
