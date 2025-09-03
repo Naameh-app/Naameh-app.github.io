@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Naameh - Intelligent Tutor App</title>
+    <meta name="description" content="Naameh, an innovative educational platform that leverages artificial intelligence to provide high-quality, affordable education for all Iranian students."/>
+
+    <!-- Tailwind 3 -->
+    <script src="/assets/code/tailwind.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="/assets/code/lucide.js"></script>
+
+    <!-- HTMX -->
+    <script src="/assets/code/htmx.js"></script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/assets/code/index.css"/>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    container: {center: true, padding: '1rem'},
+                    fontFamily: {
+                        sans: ['Arad', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        },
+                        secondary: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c'
+                        },
+                        accent: {
+                            500: '#a855f7',
+                            600: '#9333ea'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-hero':
+                            'radial-gradient(1200px 600px at 80% -10%, rgba(59,130,246,0.25), transparent), radial-gradient(800px 500px at 20% 20%, rgba(168,85,247,0.18), transparent), linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0))',
+                        'gradient-hero-dark':
+                            'radial-gradient(1200px 600px at 80% -10%, rgba(59,130,246,0.25), transparent), radial-gradient(800px 500px at 20% 20%, rgba(168,85,247,0.25), transparent), linear-gradient(180deg, rgba(17,24,39,0.9), rgba(17,24,39,0))',
+                        'glass':
+                            'linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.25))',
+                        'glass-dark':
+                            'linear-gradient(180deg, rgba(17,24,39,0.6), rgba(17,24,39,0.25))'
+                    },
+                    boxShadow: {
+                        glow: '0 10px 40px -10px rgba(59,130,246,0.35)',
+                        soft: '0 12px 32px -12px rgba(0,0,0,0.25)'
+                    },
+                    keyframes: {
+                        float: {'0%, 100%': {transform: 'translateY(0)'}, '50%': {transform: 'translateY(-8px)'}},
+                        fadeUp: {
+                            '0%': {opacity: 0, transform: 'translateY(18px)'},
+                            '100%': {opacity: 1, transform: 'translateY(0)'}
+                        }
+                    },
+                    animation: {
+                        float: 'float 6s ease-in-out infinite',
+                        fadeUp: 'fadeUp 0.8s ease forwards'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .text-gradient {
+            background: linear-gradient(90deg, #2563eb, #a855f7, #f97316);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .backdrop-glass {
+            backdrop-filter: saturate(160%) blur(16px);
+        }
+    </style>
+</head>
+
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 antialiased">
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (window.location.href.includes("/body")) {
+            window.location.replace(window.location.href.replace("/body", ""))
+        }
+    });
+</script>
+
+<!-- Decorative background -->
+<div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute inset-0 bg-gradient-hero dark:bg-gradient-hero-dark"></div>
+</div>
+
+<!-- Floating Top Bar -->
+<header class="fixed top-4 left-4 right-4 z-50">
+    <div class="container">
+        <div class="backdrop-glass bg-glass dark:bg-glass-dark border border-white/30 dark:border-white/10 shadow-soft rounded-2xl">
+            <div class="flex items-center justify-between px-4 md:px-6 h-16">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center gap-2">
+                    <img src="/assets/images/logo.png" alt="Naameh"
+                         class="h-9 w-9 rounded-xl shadow-glow"/>
+                    <span class="text-2xl font-extrabold text-gradient">Naameh</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="#home" class="hover:text-primary-600 dark:hover:text-primary-500 transition">Home</a>
+                    <a href="#features" class="hover:text-primary-600 dark:hover:text-primary-500 transition">Features</a>
+                    <a href="#stats" class="hover:text-primary-600 dark:hover:text-primary-500 transition">Statistics</a>
+                    <a href="#contact" class="hover:text-primary-600 dark:hover:text-primary-500 transition">About</a>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle"
+                            class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/30 dark:border-white/10 hover:bg-white/40 dark:hover:bg-white/10 transition">
+                        <i data-lucide="moon" class="h-5 w-5 hidden dark:block"></i>
+                        <i data-lucide="sun" class="h-5 w-5 dark:hidden"></i>
+                    </button>
+                    <button id="lang-selector-btn"
+                            class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/30 dark:border-white/10 hover:bg-white/40 dark:hover:bg-white/10 transition">
+                        <i data-lucide="languages" class="h-5 w-5 hidden dark:block" id="lang-menu-icon"></i>
+                        <i data-lucide="x" class="h-5 w-5 dark:hidden" id="lang-menu-close-icon"></i>
+                    </button>
+                    <button id="mobile-menu-btn"
+                            class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl border border-white/30 dark:border-white/10 hover:bg-white/40 dark:hover:bg-white/10 transition">
+                        <i data-lucide="menu" class="h-5 w-5" id="menu-icon"></i>
+                        <i data-lucide="x" class="h-5 w-5 hidden" id="close-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Nav -->
+            <nav id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+                <div class="grid gap-2">
+                    <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#home">Home</a>
+                    <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition"
+                       href="#features">Features</a>
+                    <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#stats">Statistics</a>
+                    <a class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition" href="#contact">Contact</a>
+                </div>
+            </nav>
+
+            <nav id="lang-selector-menu" class="hidden px-4 pb-4">
+                <div class="grid gap-2">
+                    <button class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition"
+                            hx-get="/en/body"
+                            hx-target="body"
+                            hx-swap="innerHTML"
+                            onclick="localStorage.setItem('language', 'en')">English
+                    </button>
+                    <!--                    <button class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition"-->
+                    <!--                            hx-get="/ar/body"-->
+                    <!--                            hx-target="body"-->
+                    <!--                            hx-swap="innerHTML"-->
+                    <!--                            onclick="localStorage.setItem('language', 'ar')">العربية-->
+                    <!--                    </button>-->
+                    <button class="px-4 py-3 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition"
+                            hx-get="/body"
+                            hx-target="body"
+                            hx-swap="innerHTML"
+                            onclick="localStorage.setItem('language', 'fa')">فارسی
+                    </button>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+</header>
+
+<!-- Hero -->
+<section id="home" class="pt-32 md:pt-36">
+    <div class="container">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+            <!-- Text -->
+            <div class="space-y-7 animate-fadeUp">
+                <h1 class="text-2xl sm:text-6xl font-extrabold leading-tight">
+                    Intelligent education with
+                    <span class="text-gradient">Artificial Intelligence</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Naameh, an innovative educational platform that leverages artificial intelligence to provide high-quality, affordable education for all Iranian students.
+                </p>
+
+                <div class="flex flex-wrap gap-1 sm:gap-4">
+                    <!--                        <a href="#features"-->
+                    <!--                           class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white bg-gradient-to-l from-primary-600 via-accent-600 to-secondary-600 shadow-glow hover:shadow-xl transition">-->
+                    <!--                            Start learning-->
+                    <!--                            <i data-lucide="arrow-left" class="h-5 w-5"></i>-->
+                    <!--                        </a>-->
+                    <a href="#features"
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-300/60 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/5 transition">
+                        View features
+                        <i data-lucide="play" class="h-5 w-5"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-3 gap-6 pt-4">
+                    <div class="rounded-2xl p-4 bg-white/70 dark:bg-white/5 border border-white/30 dark:border-white/10 backdrop-glass text-center">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-primary-600">16 million
+                        </div>
+                        <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Iranian students
+                        </div>
+                    </div>
+                    <div class="rounded-2xl p-4 bg-white/70 dark:bg-white/5 border border-white/30 dark:border-white/10 backdrop-glass text-center">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-secondary-600">1–12
+                        </div>
+                        <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Grade levels
+                        </div>
+                    </div>
+                    <div class="rounded-2xl p-4 bg-white/70 dark:bg-white/5 border border-white/30 dark:border-white/10 backdrop-glass text-center">
+                        <div class="text-2xl sm:text-3xl font-extrabold text-accent-600">24&#x2F;7
+                        </div>
+                        <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Access to education
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual -->
+            <div class="relative">
+                <div class="absolute -inset-6 bg-gradient-to-tr from-primary-600/20 via-accent-600/15 to-secondary-600/20 rounded-[32px] blur-2xl -z-10 w-fit"></div>
+                <div class="rounded-3xl overflow-hidden border border-white/30 dark:border-white/10 shadow-soft animate-float">
+                    
+                    <iframe width="100%" height="400"
+                            src="https://www.youtube-nocookie.com/embed/Mr1VIpoDrSI?si=C9HQFCQMIETG2oeq"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="py-20">
+    <div class="container">
+        <div class="text-center space-y-4 mb-12">
+            <h2 class="text-2xl sm:text-4xl font-extrabold">
+                The Unique features of <span class="text-gradient">Naameh</span>
+            </h2>
+            <p class="text-lg text-gray-600 dark:text-gray-300">
+                Using the latest AI technologies, we create a new learning experience for Iranian students.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card -->
+            <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
+                <div class="w-12 h-12 rounded-xl bg-primary-600/15 flex items-center justify-center mb-4">
+                    <i data-lucide="brain" class="h-6 w-6 text-primary-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Advanced Artificial Intelligence</h3>
+                <p class="text-gray-600 dark:text-gray-300">Personalized instruction based on your needs and learning pace.</p>
+            </div>
+
+            <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
+                <div class="w-12 h-12 rounded-xl bg-secondary-600/15 flex items-center justify-center mb-4">
+                    <i data-lucide="clock" class="h-6 w-6 text-secondary-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">24&#x2F;7 Learning</h3>
+                <p class="text-gray-600 dark:text-gray-300">Constant access to high-quality educational content.</p>
+            </div>
+
+            <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
+                <div class="w-12 h-12 rounded-xl bg-accent-600/15 flex items-center justify-center mb-4">
+                    <i data-lucide="gamepad-2" class="h-6 w-6 text-accent-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Gamification</h3>
+                <p class="text-gray-600 dark:text-gray-300">Engaging learning with rewards, levels, and intelligent challenges.</p>
+            </div>
+
+            <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
+                <div class="w-12 h-12 rounded-xl bg-primary-600/15 flex items-center justify-center mb-4">
+                    <i data-lucide="users" class="h-6 w-6 text-primary-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Online Group Classes</h3>
+                <p class="text-gray-600 dark:text-gray-300">Interactive, collective learning with classmates and tutors.</p>
+            </div>
+
+            <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
+                <div class="w-12 h-12 rounded-xl bg-secondary-600/15 flex items-center justify-center mb-4">
+                    <i data-lucide="book-open" class="h-6 w-6 text-secondary-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Comprehensive Content</h3>
+                <p class="text-gray-600 dark:text-gray-300">Complete coverage of subjects from grade one through twelve.</p>
+            </div>
+
+            <div class="group rounded-2xl p-6 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass hover:shadow-glow transition">
+                <div class="w-12 h-12 rounded-xl bg-accent-600/15 flex items-center justify-center mb-4">
+                    <i data-lucide="award" class="h-6 w-6 text-accent-600"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Entrance Exam Preparation</h3>
+                <p class="text-gray-600 dark:text-gray-300">Specialized practice and learning pathways to succeed in exams.</p>
+            </div>
+        </div>
+
+        <!-- Split Feature -->
+        <div class="grid lg:grid-cols-2 gap-10 items-center mt-16">
+            <div class="space-y-4">
+                <div class="rounded-2xl overflow-hidden border border-white/30 dark:border-white/10 shadow-soft">
+                    <img class="w-full h-[420px] object-cover" src="/assets/images/ai.gif"/>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
+                    Smart learning with
+                    <span class="inline-flex items-center gap-2 text-gradient">
+                <i data-lucide="brain" class="h-7 w-7 text-primary-600"></i>
+                Artificial Intelligence
+              </span>
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Every Naameh student has an intelligent private tutor available at all times and can ask all their academic questions.
+                </p>
+                <div class="flex gap-4">
+              <span class="inline-flex items-center gap-2 text-sm">
+                <i data-lucide="trending-up" class="h-5 w-5 text-green-500"></i> Faster progress
+              </span>
+                    <span class="inline-flex items-center gap-2 text-sm">
+                <i data-lucide="target" class="h-5 w-5 text-primary-600"></i> Precise instruction
+              </span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-2xl font-extrabold">Easy access from anywhere</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    With responsive design and a simple user interface, students can access educational content from any device at any time. Education is no longer limited by time and place.
+                </p>
+                <div class="flex gap-4">
+              <span class="inline-flex items-center gap-2 text-sm">
+                <i data-lucide="smartphone" class="h-5 w-5 text-secondary-600"></i> Mobile and tablet
+              </span>
+                    <span class="inline-flex items-center gap-2 text-sm">
+                <i data-lucide="laptop" class="h-5 w-5 text-primary-600"></i> Desktop computer
+              </span>
+                    <span class="inline-flex items-center gap-2 text-sm">
+                <i data-lucide="clock" class="h-5 w-5 text-green-500"></i> 24&#x2F;7
+              </span>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-white/30 dark:border-white/10 shadow-soft">
+                    <img src="/assets/images/desktop.png" class="w-full"
+                         alt="Desktop computer"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section id="stats" class="py-20">
+    <div class="container">
+        <div class="text-center space-y-4 mb-12">
+            
+            <h2 class="text-3xl sm:text-4xl font-extrabold">
+                <span class="text-gradient">Impressive</span> Stats and Figures.
+            </h2>
+            
+            <p class="text-lg text-gray-600 dark:text-gray-300">
+                A look at the huge potential of Iran&#x27;s education market and the opportunities ahead for Naameh
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <div class="rounded-2xl p-6 text-center border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass">
+                <div class="mx-auto w-12 h-12 rounded-xl bg-primary-600 text-white flex items-center justify-center mb-3">
+                    <i data-lucide="users" class="h-6 w-6"></i>
+                </div>
+                <div class="text-xl font-extrabold">16 million</div>
+                <div class="text-primary-600 font-bold mt-1">Iranian students
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Our large target market</p>
+            </div>
+
+            <div class="rounded-2xl p-6 text-center border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass">
+                <div class="mx-auto w-12 h-12 rounded-xl bg-secondary-600 text-white flex items-center justify-center mb-3">
+                    <i data-lucide="pencil-off" class="h-6 w-6"></i>
+                </div>
+                <div class="text-xl font-extrabold">Lack of access</div>
+                <div class="text-primary-600 font-bold mt-1">Many students</div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">to educational resources and private tutoring</p>
+            </div>
+
+            <div class="rounded-2xl p-6 text-center border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass">
+                <div class="mx-auto w-12 h-12 rounded-xl bg-primary-600 text-white flex items-center justify-center mb-3">
+                    <i data-lucide="book-open" class="h-6 w-6"></i>
+                </div>
+                <div class="text-2xl font-extrabold">12 grades</div>
+                <div class="text-primary-600 font-bold mt-1">Schooling</div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Full coverage of the school years</p>
+            </div>
+
+            <div class="rounded-2xl p-6 text-center border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass">
+                <div class="mx-auto w-12 h-12 rounded-xl bg-primary-600 text-white flex items-center justify-center mb-3">
+                    <i data-lucide="award" class="h-6 w-6"></i>
+                </div>
+                <div class="text-2xl font-extrabold">1% of the market</div>
+                <div class="text-primary-600 font-bold mt-1">Initial target
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">160,000 students</p>
+            </div>
+        </div>
+
+        <div class="rounded-3xl p-8 lg:p-12 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-glass">
+            <div class="text-center space-y-6">
+                <h3 class="text-2xl sm:text-3xl font-extrabold">Naameh&#x27;s revenue model</h3>
+                <div class="grid md:grid-cols-4 gap-5 max-w-4xl mx-auto">
+                    <div>
+                        <div class="text-xl font-extrabold text-primary-600">1% of the market
+                        </div>
+                        <div class="text-gray-600 dark:text-gray-300">160,000 students out of 16 million
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xl font-extrabold text-secondary-600">200,000 Toman
+                        </div>
+                        <div class="text-gray-600 dark:text-gray-300">Average monthly subscription
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xl font-extrabold text-yellow-500">32 billion Toman
+                        </div>
+                        <div class="text-gray-600 dark:text-gray-300">Predicted monthly revenue
+                        </div>
+                    </div>
+                    <div>
+                        <div class="text-xl font-extrabold text-red-500">2 billion Toman
+                        </div>
+                        <div class="text-gray-600 dark:text-gray-300">Predicted monthly cost
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-3xl font-extrabold text-green-500">30 billion Toman
+                    </div>
+                    <div class="text-gray-700 dark:text-gray-200 text-lg">Monthly profit
+                    </div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    Considering only 1% of Iran&#x27;s students as Naameh users, there is significant revenue potential.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact" class="pt-16 pb-8">
+    <div class="container">
+        <div class="grid lg:grid-cols-4 gap-10">
+            <div class="space-y-5">
+                <div class="flex items-center gap-2">
+                    <img src="/assets/images/logo.png" class="h-12 w-12 rounded-xl"
+                         alt="Naameh"/>
+                    <span class="text-3xl font-extrabold text-gradient">Naameh</span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300">
+                    An intelligent education platform that, using artificial intelligence, builds the future of education in Iran. Learning for everyone, anytime, anywhere.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-white/30 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-gray-600 dark:text-gray-300">
+            <div>© 1404 Naameh. All rights reserved.</div>
+            <div class="flex items-center gap-2">
+                <span>Built with</span>
+                <i data-lucide="heart" class="h-4 w-4 text-red-500 fill-current"></i>
+                <span>by <a class="underline hover:text-primary-600"
+                                                                href="https://smartnima.com/">Nima Fanniasl</a></span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function initUI() {
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function applyTheme(theme) {
+            if (theme === 'dark') html.classList.add('dark');
+            else html.classList.remove('dark');
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+            applyTheme(savedTheme);
+        } else {
+            applyTheme(prefersDark.matches ? 'dark' : 'light');
+        }
+
+        // Remove existing prefersDark listener and add new one
+        prefersDark.removeEventListener('change', window.themePrefListener);
+        window.themePrefListener = (e) => {
+            const stored = localStorage.getItem('theme');
+            if (!stored) applyTheme(e.matches ? 'dark' : 'light');
+        };
+        prefersDark.addEventListener('change', window.themePrefListener);
+
+        if (themeToggle) {
+            // Clone and replace to remove old listeners
+            const newThemeToggle = themeToggle.cloneNode(true);
+            themeToggle.parentNode.replaceChild(newThemeToggle, themeToggle);
+
+            newThemeToggle.addEventListener('click', () => {
+                const isDark = html.classList.contains('dark');
+                const next = isDark ? 'light' : 'dark';
+                applyTheme(next);
+                localStorage.setItem('theme', next);
+            });
+        }
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
+            // Clone and replace to remove old listeners
+            const newMobileMenuBtn = mobileMenuBtn.cloneNode(true);
+            mobileMenuBtn.parentNode.replaceChild(newMobileMenuBtn, mobileMenuBtn);
+
+            newMobileMenuBtn.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                menuIcon.classList.toggle('hidden', !isHidden);
+                closeIcon.classList.toggle('hidden', isHidden);
+            });
+        }
+
+        // Language selector menu - FIXED: using correct element IDs
+        const langSelectorBtn = document.getElementById('lang-selector-btn');
+        const langSelectorMenu = document.getElementById('lang-selector-menu');
+        const langMenuIcon = document.getElementById('lang-menu-icon');
+        const langMenuCloseIcon = document.getElementById('lang-menu-close-icon');
+
+        if (langSelectorBtn && langSelectorMenu && langMenuIcon && langMenuCloseIcon) {
+            // Clone and replace to remove old listeners
+            const newLangSelectorBtn = langSelectorBtn.cloneNode(true);
+            langSelectorBtn.parentNode.replaceChild(newLangSelectorBtn, langSelectorBtn);
+
+            newLangSelectorBtn.addEventListener('click', () => {
+                const isHidden = langSelectorMenu.classList.contains('hidden');
+                langSelectorMenu.classList.toggle('hidden');
+                langMenuIcon.classList.toggle('hidden', !isHidden);
+                langMenuCloseIcon.classList.toggle('hidden', isHidden);
+            });
+        }
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach((a) => {
+            // Clone and replace to remove old listeners
+            const newLink = a.cloneNode(true);
+            a.parentNode.replaceChild(newLink, a);
+
+            newLink.addEventListener('click', (e) => {
+                const target = document.querySelector(newLink.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({behavior: 'smooth', block: 'start'});
+                    // Close mobile menu on navigation
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuIcon.classList.remove('hidden');
+                        closeIcon.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    }
+
+    // Initial setup
+    lucide.createIcons();
+    initUI();
+
+    // Re-initialize after htmx swaps
+    htmx.on("htmx:afterSwap", (evt) => {
+        lucide.createIcons();
+        initUI();
+
+        if (evt.detail.xhr.responseURL.includes("/en/")) {
+            document.documentElement.lang = "en";
+            document.documentElement.dir = "ltr";
+        } else if (evt.detail.xhr.responseURL.includes("/ar/")) {
+            document.documentElement.lang = "ar";
+            document.documentElement.dir = "rtl";
+        } else {
+            document.documentElement.lang = "fa";
+            document.documentElement.dir = "rtl";
+        }
+    });
+</script>
+</body>
+</html>
