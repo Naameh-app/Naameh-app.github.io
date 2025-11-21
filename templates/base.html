@@ -107,7 +107,7 @@
 
                 if (timeZone === 'Asia/Tehran') {
                     lang = 'fa';
-                } else if (timeZone === 'Asia/Dubai') {
+                } else if (timeZone === 'Asia/Dubai' || timeZone === "Asia/Riyadh") {
                     lang = 'ar';
                 } else {
                     lang = 'en';
@@ -134,7 +134,7 @@
 
         // Now manually trigger the HTMX request with the correct URL
         const bodyUrl = (lang === 'fa') ? '/body' : '/' + lang + '/body';
-        htmx.ajax('GET', bodyUrl, { target: 'body', swap: 'outerHTML'});
+        htmx.ajax('GET', bodyUrl, {target: 'body', swap: 'outerHTML'});
     });
 </script>
 </body>
